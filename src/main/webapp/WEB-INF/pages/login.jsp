@@ -69,7 +69,7 @@
 									<th>Enter User Name :</th>
 
 									<td><input id="id1" type="text" name="username"
-										placeholder="enter username" /> <span id="span1"></span>
+										placeholder="enter username" required/> <span id="span1"></span>
 									<td rowspan=3><img src="/SpringExampleMvc/images/icon19.jpg"></td>
 
 									</td>
@@ -77,7 +77,7 @@
 								<tr>
 									<th>Enter Password :</th>
 									<td><input id="id2" type="password" name="password"
-										placeholder="Password" /> <span id="span2"></span></td>
+										placeholder="Password" required/> <span id="span2"></span></td>
 								</tr>
 								<tr>
 									<td colspan="2" align="center"><input type="submit" name="submit"/> <br />

@@ -29,7 +29,7 @@ public class UserController {
 	 * @param response : returns the page decided by getChoice() of the UserService class
 	 * @return
 	 */
-	@RequestMapping(value="/choice",method=RequestMethod.POST)
+	@RequestMapping(value="/choice",method=RequestMethod.GET)
 	public ModelAndView question(HttpServletRequest request, HttpServletResponse response){
 		return new ModelAndView(userService.getChoice(request));
 	}
@@ -75,6 +75,27 @@ public class UserController {
 	@RequestMapping(value="/getRegister", method=RequestMethod.GET)
 	public ModelAndView getRegister(HttpServletRequest request, HttpServletResponse response){
 		return new ModelAndView("register");
+	}
+	 
+		@RequestMapping(value="/ask", method=RequestMethod.POST)
+		public ModelAndView ask(HttpServletRequest request){
+			return new ModelAndView(userService.ask(request));
+		}
+	
+
+	@RequestMapping(value = "/InsertQuestion", method = RequestMethod.POST)
+	public ModelAndView insertQuestion(HttpServletRequest request){
+		return new ModelAndView(userService.insertQuestion(request));
+	}
+
+	@RequestMapping(value = "/addAnswer", method = RequestMethod.GET)
+	public ModelAndView addAnswer(HttpServletRequest request){
+		return new ModelAndView("addAnswer");
+	}
+	@RequestMapping(value = "/addAnswers", method = RequestMethod.GET)
+	public ModelAndView addAnswers(HttpServletRequest request){
+		System.out.println("in add answers");
+		return new ModelAndView(userService.addAnswers(request));
 	}
 
 }

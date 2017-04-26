@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 
@@ -70,7 +75,7 @@ if(session.getAttribute("name") == null){
 
 
 %>
-<form action ="<%=request.getContextPath()%>/UserTroubleShootingDesk/choice.html" method="post">
+<form action ="<%=request.getContextPath()%>/UserTroubleShootingDesk/choice.html" method="get">
     <!-- need to define ajax calls and js code -->
     <div class="background">
         <div class="box">
@@ -78,21 +83,26 @@ if(session.getAttribute("name") == null){
          
             <h1><img src="/SpringExampleMvc/images/icon1.png" width="100px" height="100px" display="inline">Welcome &nbsp; &nbsp;<%=name %>!!</h1>
                
-               <p><img src="/SpringExampleMvc/images/icon12.png" height="75px" width="75px">Choose the following search options : </p>
+              <b> <%if(request.getAttribute("error") != null){  %>
+					<%= request.getAttribute("error") %>
+					<%} %>
+					</b>
+					  <b> <%if(request.getAttribute("success") != null){  %>
+					<%= request.getAttribute("success") %>
+					<%} %>
+					</b>
+					
+					
+					   <p><img src="/SpringExampleMvc/images/icon12.png" height="75px" width="75px">Choose the following options : </p>
             <div id="div1">
             <p>
             <table align="center" border="0" padding="10">
+           
             <tr>
-            <td> <input type="radio" id="HardWare" name="choice" value="user_hardware" checked> </td>
-            <td><img src="/SpringExampleMvc/images/icon23.png" width="90px" height="90px" /> </td>
-            <td></td>
-            <td> <input type="radio" id="SoftWare" name="choice" value="user_software"></td>
-            <td><img src="/SpringExampleMvc/images/icon10.png" width="90px" height="90px" /> </td>
-            <td></td>
-            </tr>
-            <tr>
-            <td colspan="3"> Hardware </td>
-            <td colspan="3"> Software </td>
+           <td> <input type="radio" name="choice" value="question"/> Enter a Question with Answer </td>
+           <td> <input type="radio" name="choice" value="ask"/> Ask the admin </td>
+           <td> <input type="radio" name="choice" value="obtain"/> Find the answers from existing questions </td>
+           
             </tr>
             <tr>
             <td colspan="3"> <p> </p> </td>

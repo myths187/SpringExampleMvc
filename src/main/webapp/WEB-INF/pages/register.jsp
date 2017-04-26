@@ -52,25 +52,25 @@ div.background {
 										width="100" height="100"></th>
 									<th>Enter First Name :</th>
 									<td><input type="text" name="firstName"
-										placeholder="First Name" /></td>
+										placeholder="First Name" required /></td>
 									<th>Enter Last Name :</th>
 									<td><input type="text" name="lastName"
-										placeholder="Last Name" /></td>
+										placeholder="Last Name" required/></td>
 								</tr>
 								<tr>
 									<th>Enter User Name :</th>
 									<td><input type="text" name="userName"
-										placeholder="enter username" /></td>
+										placeholder="enter username" required /></td>
 								</tr>
 								<tr>
 									<th>Enter Email id :</th>
 									<td><input type="email" name="email"
-										placeholder="example@mail.com" /></td>
+										placeholder="example@mail.com" required/></td>
 								</tr>
 								<tr>
 									<th>Enter Password :</th>
 									<td><input type="password" id="pwd1" name="password"
-										placeholder="Password" /></td>
+										placeholder="Password" required/></td>
 								</tr>
 																<tr>
 									<td colspan="5" align="center"><input type="submit" value="submit" /></td>

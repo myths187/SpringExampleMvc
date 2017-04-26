@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.app.dao.InformationObtainer;
+import com.app.model.QuestionAndAnswer;
+import com.app.model.QuestionGetter;
 /**
  * 
  * This bean obtains the choices made by the user, makes back decision, gets Answers to the user,
@@ -21,6 +23,8 @@ public class UserService {
 	
 	@Autowired
 	RegisterValidate registerValidate;
+	
+	
 	/**
 	 * 
 	 * @param request
@@ -32,24 +36,18 @@ public class UserService {
 		String str = request.getParameter("choice");
 		HttpSession ses = request.getSession();
 		ses.setAttribute("request", str);
-		String page = "";
-
-		if ("user_hardware".equalsIgnoreCase(str)) {
-			@SuppressWarnings("rawtypes")
-			List list = informationObtainer.getQuestion("hardware");
+		String page ="";
+		if("question".equalsIgnoreCase(str)){
+			page="question";
+		}
+		if("ask".equalsIgnoreCase(str)){
+			page="ask";
+		}
+		if("obtain".equalsIgnoreCase(str)){
+			List<QuestionAndAnswer> list = informationObtainer.getQuestion();
 			request.setAttribute("question", list);
-			page = "UserHardware";
+			page="obtain";
 		}
-
-		if (("user_software".equalsIgnoreCase(str))) {
-			@SuppressWarnings("rawtypes")
-			List soft_list = informationObtainer.getQuestion("software");
-			request.setAttribute("question", soft_list);
-			request.setAttribute("request", "software");
-			page = "UserSoftware";
-
-		}
-
 		return page;
 	}
 	/**
@@ -64,19 +62,15 @@ public class UserService {
 		HttpSession ses = request.getSession();
 		String str = (String) ses.getAttribute("request");
 		String page = "";
-		if ("user_hardware".equalsIgnoreCase(str)) {
+		
 			String question = request.getParameter("wanted");
-			String list2 = informationObtainer.getAnswer(question, "hardware");
-			request.setAttribute("answer", list2);
+			
+		List list = informationObtainer.getAnswer(question);
+		HttpSession session = request.getSession();
+			session.setAttribute("question", question);
+			request.setAttribute("answer", list);
 			page = "answer";
-		}
-
-		if (("user_software".equalsIgnoreCase(str))) {
-			String question = request.getParameter("wanted");
-			String soft_list2 = informationObtainer.getAnswer(question, "software");
-			request.setAttribute("answer", soft_list2);
-			page = "answer";
-		}
+		
 		return page;
 	}
 	/**
@@ -96,6 +90,61 @@ public class UserService {
 	public String register(HttpServletRequest request) {
 		
 		return registerValidate.doValidate(request);
+	}
+	public String insertQuestion(HttpServletRequest request) {
+		String question = request.getParameter("question");
+		String answer =request.getParameter("answer");
+		QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer();
+		questionAndAnswer.setQuestion(question);
+		questionAndAnswer.setAnswer(answer);
+		
+	int i=	informationObtainer.insertQuetion(questionAndAnswer);
+	String page="";
+	if(i==1){
+		request.setAttribute("success", "The post was done successfully");
+		page="question";
+	}else{
+		request.setAttribute("error", "There was a error in doing the post or the question already exists");
+		page="user";
+	}
+		return page;
+	}
+	public String ask(HttpServletRequest request) {
+		String question = request.getParameter("question");
+		System.out.println(question);
+		
+		QuestionGetter getQuestion = new QuestionGetter();
+		getQuestion.setQuestion(question);
+	int i =	informationObtainer.insertQuestion(getQuestion);
+	String page ="";
+	if(i ==1){
+		request.setAttribute("success", "The question is posted for answer");
+		page = "ask";
+	}else{
+		request.setAttribute("error", "The question already exists, please wait until answer is posted");
+		page="user";
+	}
+		return page;
+	}
+	public String addAnswers(HttpServletRequest request) {
+		String question = request.getParameter("question");
+		System.out.println(question);
+		String answer = request.getParameter("answer");
+		System.out.println(answer);
+		QuestionAndAnswer qa = new QuestionAndAnswer();
+		qa.setQuestion(question);
+		qa.setAnswer(answer);
+		int i =informationObtainer.addAnswers(qa);
+		String page="";
+		if(i==1){
+			request.setAttribute("success", "The answwer has been successfully posted");
+			page="user";
+		}else{
+			request.setAttribute("error", "The answer already exists, please try again");
+			page="user";
+			
+		}
+		return page;
 	}
 
 }

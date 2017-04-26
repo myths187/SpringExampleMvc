@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ page import="java.util.List"%>
+<%@ page import="com.app.model.QuestionGetter"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -51,15 +53,30 @@ div.box p {
 				<img src="/SpringExampleMvc/images/icon6.jpg" width="50"
 					height="50" />Welcome to TroubleShooting Desk!
 			</h1>
+			   <b> <%if(request.getAttribute("error") != null){  %>
+					<%= request.getAttribute("error") %>
+					<%} %>
+					</b>
+					  <b> <%if(request.getAttribute("success") != null){  %>
+					<%= request.getAttribute("success") %>
+					<%} %>
+					</b>
+			<p> The question searched is : <%= session.getAttribute("question") %>
 <p>
-		<%
-		String ans = (String)request.getAttribute("answer");
-						if (ans != null) {
-					%>
-		<img src="/SpringExampleMvc/images/icon8.png" width="50px" height="50px"/><c:out value="<%= ans%>" />
-		<%
-						}
-					%>
+<table align="center" border="0">
+					<%
+					List list = (List) request.getAttribute("answer");
+								for (int i = 0; i < list.size(); i++) {
+									QuestionGetter a = (QuestionGetter) list.get(i); %>
+						
+
+					<tr>
+						<td> <%=a.getQuestion() %><br /></td>
+					</tr>
+					<% 						
+								} %>
+				</table>
+<b> <a href="<%=request.getContextPath()%>/UserTroubleShootingDesk/addAnswer.html">Add more answers</a></b>
 	</p>
 <h4><a href="<%=request.getContextPath()%>/UserTroubleShootingDesk/back.html"> back </a></h4>
 </div>

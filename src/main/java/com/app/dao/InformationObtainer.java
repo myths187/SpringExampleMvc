@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.app.model.Login;
 import com.app.model.QuestionAndAnswer;
+import com.app.model.QuestionGetter;
 import com.app.model.QuestionsAnswer;
 import com.app.model.Register;
 
@@ -117,18 +118,17 @@ public class InformationObtainer {
 	 */
 
 	@SuppressWarnings("rawtypes")
-	public List getQuestion(String string) {
-		return userServices.getQuestion(string);
+	public List getQuestion() {
+		return userServices.getQuestion();
 	}
 	/**
 	 * This method obtains answer in form of String
 	 * @param question
-	 * @param string
 	 * @return
 	 */
 
-	public String getAnswer(String question, String string) {
-		return userServices.getAnswer(question, string);
+	public List getAnswer(String question) {
+		return userServices.getAnswer(question);
 	}
 	/**
 	 * This method tries to register the user into database
@@ -138,6 +138,21 @@ public class InformationObtainer {
 
 	public int register(Register register) {
 		int i = connectionEstablisher.register(register);
+		return i;
+	}
+
+	public int insertQuetion(QuestionAndAnswer questionAndAnswer) {
+		int i =userServices.insertQuetion(questionAndAnswer) ;
+		return i;
+	}
+
+	public int insertQuestion(QuestionGetter getQuestion) {
+		int i = userServices.insertQuestion(getQuestion);
+		return i;
+	}
+
+	public int addAnswers(QuestionAndAnswer qa) {
+		int i = userServices.addAnswers(qa);
 		return i;
 	}
 

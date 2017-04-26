@@ -75,7 +75,15 @@ input[type=submit] {
 		<div class="background">
 			<div class="box">
 			   <h1 id="h1"> <img src="/SpringExampleMvc/images/icon6.jpg" width="50" height="50"/>Welcome to TroubleShooting Desk! </h1>
-				<h1>The Hardware Questions are:</h1>
+				   <b> <%if(request.getAttribute("error") != null){  %>
+					<%= request.getAttribute("error") %>
+					<%} %>
+					</b>
+					  <b> <%if(request.getAttribute("success") != null){  %>
+					<%= request.getAttribute("success") %>
+					<%} %>
+					</b>
+				<h1>The Available Questions are:</h1>
 				<h2>please select a question from the following to obtain the
 					answer:</h2>
 				<table align="center" border="0">
@@ -95,16 +103,7 @@ input[type=submit] {
 								} %>
 				</table>
 	</form>
-	<p>
-		<%
-		String ans = (String)request.getAttribute("answer");
-						if (ans != null) {
-					%>
-		<c:out value="<%= ans%>" />
-		<%
-						}
-					%>
-	</p>
+	
 
 	<h3>
 		<input type="submit" value="submit" />
@@ -117,5 +116,7 @@ input[type=submit] {
 			href="<%=request.getContextPath()%>/TroubleShootingDesk/logout.html">
 			Logout</a>
 	</h3>
+	</div>
+	</div>
 </body>
 </html>
