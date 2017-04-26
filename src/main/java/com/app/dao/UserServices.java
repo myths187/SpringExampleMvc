@@ -91,8 +91,13 @@ public class UserServices {
 	}
 	public int insertQuestion(QuestionGetter getQuestion) {
 		String question = getQuestion.getQuestion();
+		String query1 = "select count(*) from question where question like '"+question+"'";
+		int res = jdbcTemplate.queryForObject(query1, Integer.class);
+		if (res >=1){
+			return 0;
+		}
 		String query = "select count(*) from queryquestion where question like '"+question+"'";
-		int res = jdbcTemplate.queryForObject(query, Integer.class);
+		 res = jdbcTemplate.queryForObject(query, Integer.class);
 		int j =0;
 		if(res >= 1){
 			return 0;
