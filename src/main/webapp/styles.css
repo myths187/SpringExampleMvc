@@ -1,0 +1,115 @@
+
+#h1{
+    font-size: 50px;
+    font-family: algerian;
+    color: #228B22;
+    text-shadow: 3px 3px 7px grey;
+    text-align: center;
+
+}
+.bars{
+	font-size: 20px;
+    font-family: Baskerville Old Face;
+    text-align: center;
+
+}
+
+ div.background {
+        background: url("images/icon17.jpg");
+        border: 2px solid black;
+    }
+    
+    div.box {
+        margin: 30px;
+        background-color: #ffffff;
+        border: 1px solid black;
+        opacity: 0.8;
+       
+    }
+    
+    div.box p {
+        margin: 9%;
+        font-weight: bold;
+        color: #000000;
+    }
+   div.background1 {
+        background: url("images/icon18.jpg");
+        background-size: 1400px 650px;
+        border: 2px solid black;
+        background-repeat: no-repeat;
+    }
+    div.box table {
+        margin: 9%;
+        font-weight: bold;
+        color: #000000;
+    }
+     div.background2 {
+        background: url("images/icon20.jpg");
+       background-size: 1400px 650px;
+        border: 2px solid black;
+        background-repeat: no-repeat;
+    }
+     div.background3 {
+        background: url("images/icon21.jpg");
+       background-size: 1400px 650px;
+        border: 2px solid black;
+        background-repeat: no-repeat;
+    }
+     div.box1 {
+        margin: 30px;
+        background-color: #ffffff;
+        border: 1px solid black;
+        opacity: 0.8;
+       
+    }
+    
+    div.box1 p {
+        margin: 4%;
+        font-weight: bold;
+        font-size: 20px;
+        font-family: Comic Sans MS;
+        color: #000000;
+    }
+    
+
+div.box1 input[type=text]:focus {
+    background-color: lightblue;
+}
+
+div.box1 input[type=text] {
+    width: 70%;
+    padding: 12px 20px;
+    height:50px;
+    font-size:18pt;
+   
+    box-sizing: border-box;
+    border: 2px solid blue;
+    background-color: lightgrey;
+   
+}
+
+div.box1 input[type=button] {
+    background-color: #800000;
+    border: 2px solid grey;
+     margin: 8px 100px;
+
+    border-radius: 10px;
+    color: white;
+    padding: 20px 40px;
+    text-align: center;
+    display: inline;
+    font-size: 16px;
+   
+}
+::-webkit-input-placeholder {
+    color: black;
+    font-style: italic;
+    font-family: Monotype Corsiva;
+    font-size: 20px;
+}
+div.background4 {
+        background: url("images/icon22.jpg");
+       background-size: 1400px 650px;
+        border: 2px solid black;
+        background-repeat: no-repeat;
+    }
