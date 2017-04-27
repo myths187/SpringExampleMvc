@@ -3,13 +3,19 @@ package com.app.service;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.app.dao.InformationObtainer;
 import com.app.model.QuestionAndAnswer;
+import com.app.model.QuestionGetter;
 import com.app.model.QuestionsAnswer;
+import com.app.model.User;
 
 /**
  * 
@@ -59,8 +65,8 @@ public class AdminService {
 		int i = informationObtainer.delete(delete);
 		if (i == 1) {
 			HttpSession ses = request.getSession();
-			List<QuestionAndAnswer> qAndA = informationObtainer.getQuestions();
-			ses.setAttribute("Hardware", qAndA);
+			List user = informationObtainer.getUsers();
+			ses.setAttribute("user", user);
 		}
 		return i;
 	}
@@ -133,6 +139,35 @@ public class AdminService {
 		}
 		return i;
 
+	}
+	
+
+	public  String submitAns(HttpServletRequest request) {
+		informationObtainer.submitAns();
+		return null;
+	}
+
+	public String choice(HttpServletRequest request) {
+		String str = request.getParameter("choice");
+		HttpSession ses = request.getSession();
+		ses.setAttribute("request", str);
+		String page ="";
+		if("users".equalsIgnoreCase(str)){
+			List<User> list = informationObtainer.getUsers();
+			request.setAttribute("user", list);
+			page="users";
+		}
+		if("Question".equalsIgnoreCase(str)){
+			List<QuestionGetter> list = informationObtainer.getQuestionsUnAnswered();
+			request.setAttribute("question", list);
+			page="getQuestion";
+		}
+		if("questions".equalsIgnoreCase(str)){
+			List<QuestionGetter> list = informationObtainer.getQuestionsUnAnswered();
+			request.setAttribute("question", list);
+			page = "questions";
+		}
+		return page;
 	}
 
 }

@@ -93,18 +93,6 @@ textarea {
 					display="inline">Welcome &nbsp; &nbsp;<%=name%>!! to Admin
 				Desk!
 				<p>
-				<b> <%
- 	if (request.getAttribute("faliure") != null) {
- %> <%=request.getAttribute("faliure")%> <%
- 	}
- %>
-					</b> <b> <%
- 	if (request.getAttribute("success") != null) {
- %> <%=request.getAttribute("success")%> <%
- 	}
- %>
-					</b></p>
-				<p>
 					<img src="/SpringExampleMvc/images/icon12.png" height="75px" width="75px">Select
 					the operation to be performed
 				</p>
@@ -118,18 +106,60 @@ textarea {
 
 
 	<div>
-	<form action="<%=request.getContextPath()%>/TroubleShootingDesk/choice.html" method="get">
-			<input type="radio" name="choice" value="users" /> List All Users
-			<input type="radio" name="choice" value="questions" /> List Unanswered Questions
-			<input type="radio" name="choice" value="Question" /> List Answered Questions	
+			<table border="1px solid black" align="center">
+						<tr>
+							<th>Question</th>
+							<th>Update</th>
+							<th>Delete</th>
+						</tr>
+						<%
+							List<QuestionAndAnswer> list = (List) session.getAttribute("Hardware");
+							for (int i = 0; i < list.size(); i++) {
+								QuestionAndAnswer a = (QuestionAndAnswer) list.get(i);
+						%>
+						<tr width="100" height="150">
+
+							<c:forEach var="list" items="${Hardware}">
+								<td><%=a.getQuestion()%></td>
+								<td><a
+									href="<%=request.getContextPath()%>/TroubleShootingDesk/update.html?wanted=<%=a.getQuestion()%>">update</a>
+								</td>
+								<td><a
+									href="<%=request.getContextPath()%>/TroubleShootingDesk/delete.html?wanted=<%=a.getQuestion()%>">delete</a><br /></td>
+								<br />
+							</c:forEach>
+							<%
+								}
+							%>
+						</tr>
 
 
-				 <b> <a
+					</table>
+
+
+</div>
+
+					<%
+						if (session.getAttribute("question") != null) {
+					%>
+					<c:out value="${question} has been updated" />
+					<%
+						}
+					%>
+					<br /> <b> <%
+ 	if (request.getAttribute("faliure") != null) {
+ %> <%=request.getAttribute("faliure")%> <%
+ 	}
+ %>
+					</b> <b> <%
+ 	if (request.getAttribute("success") != null) {
+ %> <%=request.getAttribute("success")%> <%
+ 	}
+ %>
+					</b> <b> <a
 						href="/SpringExampleMvc/TroubleShootingDesk/logout.html">
 							Logout</a>
 					</b>
-					<input type="submit" value="submit"/>
-					</form>
 				</div>
 		</div>
 		</div>

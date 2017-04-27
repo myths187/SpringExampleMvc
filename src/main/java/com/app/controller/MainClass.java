@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +95,11 @@ public class MainClass {
 		adminService.back(request);
 		return new ModelAndView("admin");
 	}
+	
+	@RequestMapping(value="/choice",method=RequestMethod.GET)
+	public ModelAndView choice(HttpServletRequest request, HttpServletResponse response){
+	return new ModelAndView(adminService.choice(request));
+	}
 	/**
 	 * 
 	 * @param delete :GET : Maps request for delete from admin page, calls delete() of AdminService class
@@ -103,15 +109,15 @@ public class MainClass {
 	 * @throws IOException
 	 */
 
-	@RequestMapping(value = "/delete", method = RequestMethod.GET)
+	@RequestMapping(value = "/deleteUser", method = RequestMethod.GET)
 	public ModelAndView deleteQuestion(
 			@RequestParam(value = "wanted", defaultValue = "", required = false) String delete,
 			HttpServletRequest request) throws ServletException, IOException {
 		int i = adminService.delete(delete, request);
 		if (i == 1) {
-			request.setAttribute("success", "the question is deleted successfully");
+			request.setAttribute("success", "the user is deleted successfully");
 		} else {
-			request.setAttribute("faliure", "could not delete the question");
+			request.setAttribute("faliure", "could not delete the user");
 		}
 		return new ModelAndView("admin");
 

@@ -63,7 +63,9 @@ div.box p {
 					</b>
 			<p> The question searched is : <%= session.getAttribute("question") %>
 <p>
+<b> The Available Answers Are</b>
 <table align="center" border="0">
+
 					<%
 					List list = (List) request.getAttribute("answer");
 								for (int i = 0; i < list.size(); i++) {
@@ -71,7 +73,7 @@ div.box p {
 						
 
 					<tr>
-						<td> <%=a.getQuestion() %><br /></td>
+						<td> <b> <%=a.getQuestion() %></b>  <br/></td>
 					</tr>
 					<% 						
 								} %>

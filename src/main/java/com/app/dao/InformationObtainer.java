@@ -156,4 +156,14 @@ public class InformationObtainer {
 		return i;
 	}
 
+	public List getUsers() {
+		List list = adminServices.getUsers();
+		return list;
+	}
+
+	public List<QuestionGetter> getQuestionsUnAnswered() {
+		
+		return adminServices.getQuestions();
+	}
+
 }

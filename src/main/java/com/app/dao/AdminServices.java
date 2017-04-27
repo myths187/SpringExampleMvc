@@ -1,13 +1,16 @@
 package com.app.dao;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.app.model.QuestionGetter;
 import com.app.model.QuestionsAnswer;
+import com.app.model.User;
 /**
  * 
  * This bean inserts records, delete records, get the information to update and updates records
@@ -63,7 +66,7 @@ public class AdminServices {
 	public int delete(String delete) {
 		int i = 0;
 	
-			i = jdbcTemplate.update("delete from hardware_tab where question like '"+delete+"'");
+			i = jdbcTemplate.update("delete from login where username like '"+delete+"'");
 		if(i==1){
 		
 			i=1;
@@ -111,6 +114,33 @@ public class AdminServices {
 		
 		return j;
 
+	}
+	public List<User> getUsers() {
+		List<User> list = new ArrayList();
+		String query = "select username from login where auth like 'user'";
+		List<Map<String, Object>>  res= jdbcTemplate.queryForList(query);
+		
+		for (@SuppressWarnings("rawtypes") Map row : res) {
+			User user = new User();
+			user.setUserName((String) row.get("username"));
+			System.out.println(user.getUserName());
+		list.add(user);
+		}
+		
+		return list;
+	}
+	public List<QuestionGetter> getQuestions() {
+		List<QuestionGetter> list = new ArrayList();
+		String query = "select question from queryquestion";
+		List<Map<String, Object>>  res= jdbcTemplate.queryForList(query);
+		
+		for (@SuppressWarnings("rawtypes") Map row : res) {
+			QuestionGetter question = new QuestionGetter();
+			question.setQuestion((String) row.get("question"));
+			list.add(question);
+		}
+		
+		return list;
 	}
 	
 
