@@ -69,14 +69,21 @@ div.box p {
 					<%
 					List list = (List) request.getAttribute("answer");
 								for (int i = 0; i < list.size(); i++) {
-									QuestionsAnswer a = (QuestionsAnswer) list.get(i); %>
+									QuestionsAnswer a = (QuestionsAnswer) list.get(i);
+									
+									int count =0;%>
 						
 
 					<tr>
-						<td> <b><input type="text" name=" <%=a.getId() %>" value=" <%=a.getAnswer() %>"/></b>  <br/></td>
+						<td> <b><input type="text" name="<%=count %>" value=" <%=a.getAnswer() %>"/></b>  
+							<a href="<%=request.getContextPath()%>/TroubleShootingDesk/deleteAnswer.html?wanted=<%= count %>">delete</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+								<a href="<%=request.getContextPath()%>/TroubleShootingDesk/updateValue.html?wanted=<%= count %>">update</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </a>
+	
+						
+						</td>
 					</tr>
 					<% 						
-								} %>
+							count ++;	} %>
 				</table>
 
 	</p>

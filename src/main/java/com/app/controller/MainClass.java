@@ -182,9 +182,11 @@ public class MainClass {
 	 * request: POST it maps the request for /updateValue from Update page calls
 	 * updateValues() of adminService class
 	 */
-	@RequestMapping(value = "/updateValue", method = RequestMethod.POST)
-	public ModelAndView updateValue(HttpServletRequest request) throws ServletException, IOException {
-		adminService.updateValues(request);
+	@RequestMapping(value = "/updateValue", method = RequestMethod.GET)
+	public ModelAndView updateValue(	@RequestParam(value = "wanted", defaultValue = "", required = false) String wanted,HttpServletRequest request) throws ServletException, IOException {
+	//	adminService.updateValues(request);
+		System.out.println(wanted);
+		System.out.println(request.getParameter(wanted));
 
 		return new ModelAndView("admin");
 
