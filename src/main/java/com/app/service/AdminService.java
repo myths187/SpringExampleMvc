@@ -35,19 +35,24 @@ public class AdminService {
 	 * @return : the integer value returned by insertRecords()
 	 */
 
-	/*public int insert(HttpServletRequest request) {
+	public String insert(HttpServletRequest request) {
 		String question = request.getParameter("question");
-		String soft = request.getParameter("software");
-		String hard = request.getParameter("hardware");
-
-		if ("".equals(soft) || ("".equals(hard))) {
-			soft = "no software solution present";
-			hard = "no hardware solution present";
-		}
-		int j = informationObtainer.insertRecords(question, soft, hard);
-
-		return j;
-	}*/
+		String answer =request.getParameter("answer");
+		QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer();
+		questionAndAnswer.setQuestion(question);
+		questionAndAnswer.setAnswer(answer);
+		
+	int i=	informationObtainer.insertQuetion(questionAndAnswer);
+	String page="";
+	if(i==1){
+		request.setAttribute("success", "The post was done successfully");
+		page="create";
+	}else{
+		request.setAttribute("error", "There was a error in doing the post or the question already exists");
+		page="admin";
+	}
+		return page;
+	}
 
 	/**
 	 * 

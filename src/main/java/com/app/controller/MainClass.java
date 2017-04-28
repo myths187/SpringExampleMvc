@@ -88,15 +88,13 @@ public class MainClass {
 	 * @throws IOException
 	 */
 
-	/*
-	 * @RequestMapping(value = "/Insert", method = RequestMethod.POST) public
-	 * ModelAndView insertQuestion(HttpServletRequest request) throws
-	 * ServletException, IOException { int res = adminService.insert(request);
-	 * if (res != 0) { request.setAttribute("success",
-	 * "The value has been inserted"); } else { request.setAttribute("faliure",
-	 * "please try again the question already exists"); }
-	 * adminService.back(request); return new ModelAndView("admin"); }
-	 */
+	
+	  @RequestMapping(value = "/Insert", method = RequestMethod.POST) 
+	  public ModelAndView insertQuestion(HttpServletRequest request) throws
+	 ServletException, IOException {
+		  return new ModelAndView(adminService.insert(request));
+	  }
+	 
 
 	@RequestMapping(value = "/choice", method = RequestMethod.GET)
 	public ModelAndView choice(HttpServletRequest request, HttpServletResponse response) {

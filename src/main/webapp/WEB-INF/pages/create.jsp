@@ -87,23 +87,20 @@ textarea {
 					<%= request.getAttribute("success") %>
 					<%} %>
 					</b>
+					
+					
                     <h3> Write your question here</h3>
-                    <input type="text" name="question" />
+                    <input type="text" name="question" required/>
                     <br/>
                     </p>
                     <p>
-                    <br/> <h3> Write the software answer here:</h3>
+                    <br/> <h3> Write the answer here:</h3>
                     <br/>
-                    <textarea cols="20" rows="10" name="software"></textarea>
-                    <br/>
-                    </p>
-                    <p>
-                    <br/> <h3> Write your Hardware answer here: </h3>
-                    <br/>
-                    <textarea cols="20" rows="10" name="hardware"></textarea>
+                    <textarea cols="20" rows="10" name="answer" required></textarea>
                     <br/>
                     </p>
-                   <b> <a href="<%=request.getContextPath()%>/TroubleShootingDesk/admin.html">back</a> &nbsp; &nbsp; &nbsp; </b>
+                   <b>
+                   <b> <a href="<%=request.getContextPath()%>/TroubleShootingDesk/back.html">back</a> &nbsp; &nbsp; &nbsp; </b>
                     <input type="submit" value="submit" />
                 </div>
             </div>
