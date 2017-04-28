@@ -166,4 +166,23 @@ public class InformationObtainer {
 		return adminServices.getQuestions();
 	}
 
+	public int submitAns(QuestionAndAnswer qa) {
+		return adminServices.submitAns(qa);
+		
+	}
+
+	public List<QuestionGetter> getQuestionsAnswered() {
+		return null;
+	}
+
+	public int addAnswersAdmin(QuestionAndAnswer qa) {
+		int i = adminServices.addAnswer(qa);
+		return i;
+	}
+
+	public int deleteQues(String delete) {
+		int i = adminServices.deleteQues(delete) ;
+		return i;
+	}
+
 }

@@ -70,7 +70,7 @@ div.box input[type=text] {
 				<img src="/SpringExampleMvc/images/icon6.jpg" width="50" height="50" />Welcome
 				to TroubleShooting Desk!
 			</h1>
-			<form action="<%=request.getContextPath()%>/UserTroubleShootingDesk/addAnswers.html" method="get">
+			<form action="<%=request.getContextPath()%>/TroubleShootingDesk/addAnswers.html" method="post">
 				<h1>
 					<img src="/SpringExampleMvc/images/icon1.png" width="100px" height="100px">Update
 					a Row Here
@@ -82,7 +82,10 @@ div.box input[type=text] {
 				<p>The Relevant Solution is :</p>
 				<input type="text" name="answer" width="100"> <br />
 			
-				<input type="submit" value="submit" /> <b> <a
+				<input type="submit" value="submit" /> <b>
+				<a
+					href="<%=request.getContextPath()%>/TroubleShootingDesk/back.html">back </a>
+					 <a
 					href="<%=request.getContextPath()%>/TroubleShootingDesk/logout.html">
 						Logout</a>
 				</b>

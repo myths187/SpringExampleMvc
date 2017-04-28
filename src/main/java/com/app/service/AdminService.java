@@ -35,7 +35,7 @@ public class AdminService {
 	 * @return : the integer value returned by insertRecords()
 	 */
 
-	public int insert(HttpServletRequest request) {
+	/*public int insert(HttpServletRequest request) {
 		String question = request.getParameter("question");
 		String soft = request.getParameter("software");
 		String hard = request.getParameter("hardware");
@@ -47,7 +47,7 @@ public class AdminService {
 		int j = informationObtainer.insertRecords(question, soft, hard);
 
 		return j;
-	}
+	}*/
 
 	/**
 	 * 
@@ -104,7 +104,7 @@ public class AdminService {
 	 * @param request
 	 * @return
 	 */
-	public int updateHardware(String question, HttpServletRequest request) {
+	/*public int updateHardware(String question, HttpServletRequest request) {
 		int i = 0;
 		QuestionsAnswer qa = informationObtainer.getHardwareAnswer(question);
 		request.setAttribute("id", qa.getId());
@@ -115,7 +115,7 @@ public class AdminService {
 		return i;
 
 	}
-
+*/
 	/**
 	 * it is called from MainClass it reads the values from the request object
 	 * and calls {@link InformationObtainer} updteValues method which returns a
@@ -143,8 +143,21 @@ public class AdminService {
 	
 
 	public  String submitAns(HttpServletRequest request) {
-		informationObtainer.submitAns();
-		return null;
+		String ans = request.getParameter("answer");
+		String question  = request.getParameter("question");
+		QuestionAndAnswer qa = new QuestionAndAnswer();
+		qa.setAnswer(ans);
+		qa.setQuestion(question);
+		int i =informationObtainer.submitAns(qa);
+		String page ="";
+		if(i==1){
+			request.setAttribute("success", "The answer has been submitted to the question");
+			page="admin";
+		}else{
+			request.setAttribute("error", "There was a error in submitting the answer");
+			page="admin";
+		}
+		return page;
 	}
 
 	public String choice(HttpServletRequest request) {
@@ -158,7 +171,8 @@ public class AdminService {
 			page="users";
 		}
 		if("Question".equalsIgnoreCase(str)){
-			List<QuestionGetter> list = informationObtainer.getQuestionsUnAnswered();
+			List<QuestionGetter> list = informationObtainer.getQuestionsAnswered();
+			System.out.println("unanswered");
 			request.setAttribute("question", list);
 			page="getQuestion";
 		}
@@ -168,6 +182,37 @@ public class AdminService {
 			page = "questions";
 		}
 		return page;
+	}
+
+	public String addAnswer(HttpServletRequest request) {
+		String question = request.getParameter("question");
+		System.out.println(question);
+		String answer = request.getParameter("answer");
+		System.out.println(answer);
+		QuestionAndAnswer qa = new QuestionAndAnswer();
+		qa.setQuestion(question);
+		qa.setAnswer(answer);
+		int i =informationObtainer.addAnswersAdmin(qa);
+		String page="";
+		if(i==1){
+			request.setAttribute("success", "The answwer has been successfully posted");
+			page="admin";
+		}else{
+			request.setAttribute("error", "The answer already exists, please try again");
+			page="admin";
+			
+		}
+		return page;
+	}
+
+	public String delQuestion(HttpServletRequest request, String delete) {
+		
+		int i = informationObtainer.deleteQues(delete);
+		if (i == 1) {
+			List<QuestionGetter> list = informationObtainer.getQuestionsUnAnswered();
+			request.setAttribute("question", list);
+		}
+		return "questions";
 	}
 
 }

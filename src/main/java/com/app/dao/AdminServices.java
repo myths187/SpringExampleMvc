@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.app.model.QuestionAndAnswer;
 import com.app.model.QuestionGetter;
 import com.app.model.QuestionsAnswer;
 import com.app.model.User;
@@ -141,6 +142,50 @@ public class AdminServices {
 		}
 		
 		return list;
+	}
+	public int submitAns(QuestionAndAnswer qa) {
+		
+		return 0;
+	}
+	public int addAnswer(QuestionAndAnswer qa) {
+		String queryQ = "select count(*) from question where question like ' "+qa.getQuestion()+"'";
+		int resQ = jdbcTemplate.queryForObject(queryQ, Integer.class);
+		if(resQ >=1){
+			return 0;
+		}
+		queryQ = "select count(*) from question";
+		int a = jdbcTemplate.queryForObject(queryQ, Integer.class);
+		a = a + 1;
+		int i = jdbcTemplate.update("insert into question values (" + a + " ,'" + qa.getQuestion() + "')");
+		if(i==0){
+			return 0;
+		}
+		String query = "select count(*) from answers where answers like '"+qa.getAnswer()+"'";
+		int res = jdbcTemplate.queryForObject(query, Integer.class);
+		System.out.println(res);
+		int j =0;
+		if(res >=1){
+			return 0;
+		}else{
+			String query1 = "select count(*) from answers";
+			int b = jdbcTemplate.queryForObject(query1, Integer.class);
+			b = b + 1;
+		j = jdbcTemplate.update("insert into answers values (" + b + " ,'" + qa.getAnswer()
+					+ "' , ( select id from question where question like '" + qa.getQuestion() + "'))");
+		 query = "delete from queryQuestion where question like '"+qa.getQuestion()+"'";
+			j=jdbcTemplate.update(query);
+			System.out.println(j+"****");
+		}
+		
+			
+		
+		return j;
+	}
+	public int deleteQues(String delete) {
+		String query = "delete from queryQuestion where question like '"+delete+"'";
+		int i=jdbcTemplate.update(query);
+				
+		return i;
 	}
 	
 

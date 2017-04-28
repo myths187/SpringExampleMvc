@@ -33,6 +33,7 @@ public class UserController {
 	public ModelAndView question(HttpServletRequest request, HttpServletResponse response){
 		return new ModelAndView(userService.getChoice(request));
 	}
+	
 	/**
 	 * 
 	 * @param request : POST /answer.. answers the selected question from the user

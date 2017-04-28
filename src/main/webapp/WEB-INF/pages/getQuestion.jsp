@@ -84,8 +84,7 @@ input[type=submit] {
 					<%} %>
 					</b>
 				<h1>The Available Questions are:</h1>
-				<h2>please select a question from the following to obtain the
-					answer:</h2>
+				<h2>please select a question from the following to answer:</h2>
 				<table align="center" border="0">
 					<%
 					List list = (List) request.getAttribute("question");
