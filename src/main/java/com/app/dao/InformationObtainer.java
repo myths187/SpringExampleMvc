@@ -183,4 +183,9 @@ public class InformationObtainer {
 		return i;
 	}
 
+	public int deleteQuestion(String delete) {
+		int i = adminServices.deleteQuestion(delete) ;
+		return i;
+	}
+
 }

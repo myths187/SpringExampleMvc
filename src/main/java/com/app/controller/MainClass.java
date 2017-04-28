@@ -152,8 +152,15 @@ public class MainClass {
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public ModelAndView update(@RequestParam(value = "wanted", defaultValue = "", required = false) String update,
 			HttpServletRequest request) throws ServletException, IOException {
-		return new ModelAndView( adminService.update(update, request));
-		
+		return new ModelAndView(adminService.update(update, request));
+
+	}
+
+	@RequestMapping(value = "/deleteQuestion", method = RequestMethod.GET)
+	public ModelAndView deleteQues(@RequestParam(value = "wanted", defaultValue = "", required = false) String delete,
+			HttpServletRequest request) throws ServletException, IOException {
+		return new ModelAndView(adminService.deleteQues(delete, request));
+
 	}
 
 	/**

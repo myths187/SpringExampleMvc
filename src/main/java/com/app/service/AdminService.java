@@ -215,4 +215,13 @@ public class AdminService {
 		return "questions";
 	}
 
+	public String deleteQues(String delete, HttpServletRequest request) {
+		int i = informationObtainer.deleteQuestion(delete);
+		if (i == 1) {
+			List<QuestionGetter> list = informationObtainer.getQuestion();
+			request.setAttribute("question", list);
+		}
+		return "getQuestion";
+	}
+
 }

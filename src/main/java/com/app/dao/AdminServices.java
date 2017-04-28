@@ -187,6 +187,11 @@ public class AdminServices {
 				
 		return i;
 	}
+	public int deleteQuestion(String delete) {
+		String query = "delete from Question where question like '"+delete+"'";
+		int i=jdbcTemplate.update(query);
+		return i;		
+	}
 	
 
 }
