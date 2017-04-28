@@ -88,13 +88,10 @@ public class MainClass {
 	 * @throws IOException
 	 */
 
-	
-	  @RequestMapping(value = "/Insert", method = RequestMethod.POST) 
-	  public ModelAndView insertQuestion(HttpServletRequest request) throws
-	 ServletException, IOException {
-		  return new ModelAndView(adminService.insert(request));
-	  }
-	 
+	@RequestMapping(value = "/Insert", method = RequestMethod.POST)
+	public ModelAndView insertQuestion(HttpServletRequest request) throws ServletException, IOException {
+		return new ModelAndView(adminService.insert(request));
+	}
 
 	@RequestMapping(value = "/choice", method = RequestMethod.GET)
 	public ModelAndView choice(HttpServletRequest request, HttpServletResponse response) {
@@ -151,21 +148,22 @@ public class MainClass {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
-	/*
-	 * @RequestMapping(value = "/update", method = RequestMethod.GET) public
-	 * ModelAndView update( @RequestParam(value = "wanted", defaultValue = "",
-	 * required = false) String update,HttpServletRequest request) throws
-	 * ServletException, IOException { int i
-	 * =adminService.updateHardware(update, request); if(i==1){ return new
-	 * ModelAndView("update"); } else{ return new ModelAndView("error"); } }
-	 *//**
-		 * 
-		 * @param request
-		 *            : GET from various pages
-		 * @return returns login page after invalidating session.
-		 * @throws ServletException
-		 * @throws IOException
-		 */
+
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public ModelAndView update(@RequestParam(value = "wanted", defaultValue = "", required = false) String update,
+			HttpServletRequest request) throws ServletException, IOException {
+		return new ModelAndView( adminService.update(update, request));
+		
+	}
+
+	/**
+	 * 
+	 * @param request
+	 *            : GET from various pages
+	 * @return returns login page after invalidating session.
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request) throws ServletException, IOException {

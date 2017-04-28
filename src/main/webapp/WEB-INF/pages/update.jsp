@@ -80,9 +80,9 @@ div.box input[type=text] {
 				<p>The Question Selected is :</p>
 				<input type="text" value="<%=request.getAttribute("question")%>"
 					name="question" width="100" readonly> <br />
-				<p>The Relevant Hardware Solution is :</p>
+				<p>The Solution is :</p>
 				<input type="text" value="<%=request.getAttribute("answer")%>"
-					name="hardAns" width="100"> <br />
+					name="Ans" width="100"> <br />
 				<p>The Relevant Software Solution is :</p>
 				<input type="text" value="<%=request.getAttribute("answerSoft")%>"
 					name="softAns" width="100"> <br />

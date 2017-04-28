@@ -109,18 +109,13 @@ public class AdminService {
 	 * @param request
 	 * @return
 	 */
-	/*public int updateHardware(String question, HttpServletRequest request) {
-		int i = 0;
-		QuestionsAnswer qa = informationObtainer.getHardwareAnswer(question);
-		request.setAttribute("id", qa.getId());
-		request.setAttribute("question", qa.getQuestion());
-		request.setAttribute("answer", qa.getAnswer());
-		request.setAttribute("answerSoft", qa.getSoftAns());
-		i = 1;
-		return i;
+	public String update(String question, HttpServletRequest request) {
+		List list = informationObtainer.getAnswer(question);
+		request.setAttribute("answer", list);
+		return "update";
 
 	}
-*/
+
 	/**
 	 * it is called from MainClass it reads the values from the request object
 	 * and calls {@link InformationObtainer} updteValues method which returns a
@@ -176,7 +171,7 @@ public class AdminService {
 			page="users";
 		}
 		if("Question".equalsIgnoreCase(str)){
-			List<QuestionGetter> list = informationObtainer.getQuestionsAnswered();
+			List<QuestionGetter> list = informationObtainer.getQuestion();
 			System.out.println("unanswered");
 			request.setAttribute("question", list);
 			page="getQuestion";

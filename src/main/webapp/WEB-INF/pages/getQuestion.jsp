@@ -75,16 +75,9 @@ input[type=submit] {
 		<div class="background">
 			<div class="box">
 			   <h1 id="h1"> <img src="/SpringExampleMvc/images/icon6.jpg" width="50" height="50"/>Welcome to TroubleShooting Desk! </h1>
-				   <b> <%if(request.getAttribute("faliure") != null){  %>
-					<%= request.getAttribute("faliure") %>
-					<%} %>
-					</b>
-					  <b> <%if(request.getAttribute("success") != null){  %>
-					<%= request.getAttribute("success") %>
-					<%} %>
-					</b>
+				 
 				<h1>The Available Questions are:</h1>
-				<h2>please select a question from the following to answer:</h2>
+				<h2>please select a question from the following to edit the answer:</h2>
 				<table align="center" border="0">
 					<%
 					List list = (List) request.getAttribute("question");
@@ -95,7 +88,9 @@ input[type=submit] {
 					<tr>
 						<td><input type="radio" name="wanted"
 							value="<%= a.getQuestion() %>"> &nbsp; &nbsp; <c:out
-								value="<%=a.getQuestion() %>" /> <br /></td>
+								value="<%=a.getQuestion() %>" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+								<a href="<%=request.getContextPath()%>/TroubleShootingDesk/delete.html">delete</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+								<a href="<%=request.getContextPath()%>/TroubleShootingDesk/update.html">update</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </a></td>
 					</tr>
 					<% 
 								
@@ -104,18 +99,15 @@ input[type=submit] {
 	</form>
 	
 
-	<h3>
-		<input type="submit" value="submit" />
-	</h3>
-	<h3>
+	
+	<span float="left"><b>
 	<a href="<%=request.getContextPath()%>/TroubleShootingDesk/back.html">Back</a>
-	</h3>
-	<h3>
-		<a
+	</b></span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+	<span float="right">
+		<b><a
 			href="<%=request.getContextPath()%>/TroubleShootingDesk/logout.html">
-			Logout</a>
-	</h3>
-	</div>
+			Logout</a></b>
+		</div>
 	</div>
 </body>
 </html>

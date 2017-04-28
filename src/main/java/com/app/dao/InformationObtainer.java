@@ -171,9 +171,7 @@ public class InformationObtainer {
 		
 	}
 
-	public List<QuestionGetter> getQuestionsAnswered() {
-		return null;
-	}
+
 
 	public int addAnswersAdmin(QuestionAndAnswer qa) {
 		int i = adminServices.addAnswer(qa);
