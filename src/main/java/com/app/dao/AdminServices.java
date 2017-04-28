@@ -82,20 +82,19 @@ public class AdminServices {
 	 * @return : {@link QuestionsAnswer}
 	 */
 	
-	public QuestionsAnswer update(String question){
-		String query1 =  "select id,answer from hardware_tab where question = '" + question + "'";
+	public List update(String question){
+		String query1 =  "select id,answers from answers where fk = ( select id from question where question like '"+question+"')";
+		List list = new ArrayList();
 		List<Map<String, Object>>  res= jdbcTemplate.queryForList(query1);
 		QuestionsAnswer qa = new QuestionsAnswer();
 		for (@SuppressWarnings("rawtypes") Map row : res) {
 			
 			qa.setId((Integer) row.get("id"));
-			qa.setAnswer((String) row.get("answer"));
+			qa.setAnswer((String) row.get("answers"));
+			System.out.println(qa.getAnswer());
+			list.add(qa);
 		}
-		String query2 =" select answer from software_tab where question = '" + question+ "'";
-		String str = jdbcTemplate.queryForObject(query2,String.class);
-		qa.setSoftAns(str);
-		qa.setQuestion(question);
-		return qa;
+			return list;
 	}
 	/**
 	 * This method updates the values in the database 

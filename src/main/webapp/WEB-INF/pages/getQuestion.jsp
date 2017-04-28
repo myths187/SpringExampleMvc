@@ -90,7 +90,7 @@ input[type=submit] {
 							value="<%= a.getQuestion() %>"> &nbsp; &nbsp; <c:out
 								value="<%=a.getQuestion() %>" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 								<a href="<%=request.getContextPath()%>/TroubleShootingDesk/deleteQuestion.html?wanted=<%= a.getQuestion() %>">delete</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-								<a href="<%=request.getContextPath()%>/TroubleShootingDesk/updateQuestion.html?wanted=<%= a.getQuestion() %>">update</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </a></td>
+								<a href="<%=request.getContextPath()%>/TroubleShootingDesk/update.html?wanted=<%= a.getQuestion() %>">update</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </a></td>
 					</tr>
 					<% 
 								

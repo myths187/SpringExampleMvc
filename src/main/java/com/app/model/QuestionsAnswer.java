@@ -1,16 +1,10 @@
 package com.app.model;
 
 public class QuestionsAnswer {
-	private int id;;
+	private int id;
 	private String question;
 	private String answer;
-	private String softAns;
-	public String getSoftAns() {
-		return softAns;
-	}
-	public void setSoftAns(String softAns) {
-		this.softAns = softAns;
-	}
+	
 	public String getAnswer() {
 		return answer;
 	}
@@ -31,8 +25,8 @@ public class QuestionsAnswer {
 	}
 	@Override
 	public String toString() {
-		return "QuestionsAnswer [id=" + id + ", question=" + question + ", answer=" + answer + ", softAns=" + softAns
-				+ "]";
+		return "QuestionsAnswer [id=" + id + ", question=" + question + ", answer=" + answer + 
+				"]";
 	}
 	
 	

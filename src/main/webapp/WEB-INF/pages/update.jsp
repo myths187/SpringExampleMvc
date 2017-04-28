@@ -1,19 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ page import="java.util.List"%>
+<%@ page import="com.app.model.QuestionsAnswer"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>TroubleShooting Desk</title>
-<link href="/SpringExampleMvc/styles.css" rel="stylesheet" />
 <link rel="icon" href="/SpringExampleMvc/images/icon2.png" type="image/png"
 	sizes="16x16">
 <style>
 div.background {
-	background: url("/SpringExampleMvc/images//icon26.jpg");
+	background: url("/SpringExampleMvc/images/icon26.jpg");
 	border: 2px solid black;
-	 background-repeat: no-repeat; 
-	 background-size: 100% 100%;
+	 background-repeat: no-repeat;
+	  background-size: 100% 100%;
 }
 
 div.box {
@@ -24,7 +26,7 @@ div.box {
 }
 
 div.box p {
-	margin: 2%;
+	margin: 3%;
 	font-weight: bold;
 	color: #000000;
 }
@@ -36,67 +38,52 @@ div.box p {
 	text-shadow: 3px 3px 7px grey;
 	text-align: center;
 }
-
-
-
-input[type=submit] {
-	background-color: #6495ED;
-	border: 2px solid grey;
-	border-radius: 10px;
-	color: white;
-	padding: 20px 40px;
-	text-align: center;
-	display: inline;
-	font-size: 16px;
-}
-
-div.box input[type=text] {
-	width: 70%;
-	padding: 12px 20px;
-	height: 50px;
-	margin: 20px;
-	font-size: 18pt;
-	box-sizing: border-box;
-	border: 2px solid blue;
-	background-color: lightgrey;
-}
+  div.box p {
+        margin: 9%;
+        font-weight: bold;
+        color: #000000;
+        font-size: 18px;
+    }
 </style>
 </head>
 <body>
-
-	<div class="background">
+<div class="background">
 		<div class="box">
 			<h1 id="h1">
-				<img src="/SpringExampleMvc/images/icon6.jpg" width="50" height="50" />Welcome
-				to TroubleShooting Desk!
+				<img src="/SpringExampleMvc/images/icon6.jpg" width="50"
+					height="50" />Welcome to TroubleShooting Desk!
 			</h1>
-			<form action="<%=request.getContextPath()%>/TroubleShootingDesk/updateValue.html" method="post">
-				<h1>
-					<img src="/SpringExampleMvc/images/icon1.png" width="100px" height="100px">Update
-					a Row Here
-				</h1>
-
-				<input type="hidden" value="<%=request.getAttribute("id")%>" name="id" />
-				<p>The Question Selected is :</p>
-				<input type="text" value="<%=request.getAttribute("question")%>"
-					name="question" width="100" readonly> <br />
-				<p>The Solution is :</p>
-				<input type="text" value="<%=request.getAttribute("answer")%>"
-					name="Ans" width="100"> <br />
-				<p>The Relevant Software Solution is :</p>
-				<input type="text" value="<%=request.getAttribute("answerSoft")%>"
-					name="softAns" width="100"> <br />
-				<h2>
-					<b> <a href="<%=request.getContextPath()%>/TroubleShootingDesk/admin.html">back</a>
+			   <b> <%if(request.getAttribute("error") != null){  %>
+					<%= request.getAttribute("error") %>
+					<%} %>
 					</b>
-				</h2>
-				<input type="submit" value="submit" /> <b> <a
-					href="<%=request.getContextPath()%>/TroubleShootingDesk/logout.html">
-						Logout</a>
-				</b>
-			</form>
-		</div>
-	</div>
+					  <b> <%if(request.getAttribute("success") != null){  %>
+					<%= request.getAttribute("success") %>
+					<%} %>
+					</b>
+			<p> The question searched is : <%= request.getAttribute("question") %>
+<p>
+<b> The Available Answers Are</b>
+<table align="center" border="0">
+
+					<%
+					List list = (List) request.getAttribute("answer");
+								for (int i = 0; i < list.size(); i++) {
+									QuestionsAnswer a = (QuestionsAnswer) list.get(i); %>
+						
+
+					<tr>
+						<td> <b><input type="text" name=" <%=a.getId() %>" value=" <%=a.getAnswer() %>"/></b>  <br/></td>
+					</tr>
+					<% 						
+								} %>
+				</table>
+
+	</p>
+<h4><a href="<%=request.getContextPath()%>/TroubleShootingDesk/back.html"> back </a></h4>
+<h4><a href="<%=request.getContextPath()%>/TroubleShootingDesk/logout.html"> logout </a></h4>
+</div>
+</div>
 
 
 </body>

@@ -97,7 +97,7 @@ public class InformationObtainer {
 	 * @return
 	 */
 
-	public QuestionsAnswer getHardwareAnswer(String question) {
+	public List update(String question) {
 		return adminServices.update(question);
 	}
 	/**

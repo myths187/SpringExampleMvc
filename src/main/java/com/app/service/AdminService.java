@@ -110,7 +110,8 @@ public class AdminService {
 	 * @return
 	 */
 	public String update(String question, HttpServletRequest request) {
-		List list = informationObtainer.getAnswer(question);
+		List list = informationObtainer.update(question);
+		request.setAttribute("question", question);
 		request.setAttribute("answer", list);
 		return "update";
 
