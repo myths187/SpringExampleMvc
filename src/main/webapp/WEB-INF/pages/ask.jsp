@@ -94,7 +94,7 @@ textarea {
                     </p>
                    
                    <b> <a href="<%=request.getContextPath()%>/UserTroubleShootingDesk/back.html">back</a> &nbsp; &nbsp; &nbsp; </b>
-                   </form><b><a href="<%=request.getContextPath()%>/UserTroubleShootingDesk/choice.html?choice=ask"> Ask another Question </b> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                   </form> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
                     <input type="submit" value="submit" /> &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
                     <b><a href="<%=request.getContextPath()%>/TroubleShootingDesk/logout.html"> Logout</a> </b>
                 </div>

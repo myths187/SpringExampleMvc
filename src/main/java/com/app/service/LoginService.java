@@ -31,7 +31,6 @@ public class LoginService {
 	 *  is done as admin by authorize method of {@link InformationObtainer}.
 	 */
 	public String check(Login login, HttpServletRequest request) {
-	System.out.println("entered check");
 		String page = "";
 		HttpSession ses = request.getSession();
 		ses.setAttribute("name", login.getUserName());
@@ -53,7 +52,6 @@ public class LoginService {
 			page = "error";
 			
 		}
-		System.out.println(page);
 
 		return page;
 	}

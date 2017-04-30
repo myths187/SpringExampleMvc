@@ -90,9 +90,9 @@ input[type=submit] {
 							%>
 
 					<tr>
-						<td><input type="radio" name="wanted"
+						<td><h3> <input type="radio" name="wanted"
 							value="<%= a.getQuestion() %>"> &nbsp; &nbsp; <c:out
-								value="<%=a.getQuestion() %>" />  &nbsp; &nbsp; &nbsp; &nbsp; </td>
+								value="<%=a.getQuestion() %>" />  &nbsp; &nbsp; &nbsp; &nbsp;</h3> </td>
 								<td> <a href="<%= request.getContextPath() %>/TroubleShootingDesk/submitAns.html?question=<%=a.getQuestion() %>" >Answer now</a> &nbsp; &nbsp; &nbsp; &nbsp;
 								<a href="<%= request.getContextPath() %>/TroubleShootingDesk/delQues.html?question=<%=a.getQuestion() %>" >Delete</a>
 					</tr>

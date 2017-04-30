@@ -78,8 +78,9 @@ div.box p {
 					<% 						
 								} %>
 				</table>
-<b> <a href="<%=request.getContextPath()%>/UserTroubleShootingDesk/addAnswer.html">Add more answers</a></b>
 	</p>
+	
+	<h4><a href="<%=request.getContextPath()%>/UserTroubleShootingDesk/addAnswer.html"> Add more answers </a></h4>
 <h4><a href="<%=request.getContextPath()%>/UserTroubleShootingDesk/back.html"> back </a></h4>
 </div>
 </div>

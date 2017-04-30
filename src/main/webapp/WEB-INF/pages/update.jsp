@@ -73,13 +73,12 @@ div.box p {
 									
 									%>
 						
-<%= a.getId() %>
 					
 					<tr>
 					<td><input type="hidden"  name="id" value="<%=a.getId() %>"/></td>
-						<td><input type="radio" name="wanted"
+						<td><h3><input type="radio" name="wanted"
 							value="<%= a.getAnswer() %>"> &nbsp; &nbsp; <c:out
-								value="<%=a.getAnswer() %>" /> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+								value="<%=a.getAnswer() %>" /> </h3>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 								<a href="<%=request.getContextPath()%>/TroubleShootingDesk/deleteAns.html?wanted=<%= a.getAnswer()%>&id=<%= a.getId() %>">delete</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
 								<a href="<%=request.getContextPath()%>/TroubleShootingDesk/updateValue.html?wanted=<%= a.getAnswer() %>&id=<%= a.getId() %>">update</a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </a></td>
 					</tr>

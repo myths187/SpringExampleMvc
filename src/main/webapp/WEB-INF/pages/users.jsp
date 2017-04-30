@@ -93,16 +93,21 @@ input[type=submit] {
 
 				<tr>
 					<b>
-						<td><c:out value="<%=a.getUserName()%>" /> <br /></td>
+						<td><h3><c:out value="<%=a.getUserName()%>" /> <br /></h3></td>
 						<td><a
 							href="<%=request.getContextPath()%>/TroubleShootingDesk/deleteUser.html?wanted=<%=a.getUserName()%>">delete</a>
 					</td>
+						</table>
+				<a href="<%=request.getContextPath()%>/TroubleShootingDesk/back.html">back</a>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a
+					href="<%=request.getContextPath()%>/TroubleShootingDesk/logout.html">
+						Logout</a>
 					</b>
 				</tr>
 				<%
 					}
 				%>
-			</table>
+		
 
 		</div>
 	</div>

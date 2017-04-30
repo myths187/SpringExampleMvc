@@ -92,15 +92,15 @@
             <table align="center" border="0" padding="10">
            
             <tr>
-           <td><h4> <input type="radio" name="choice" value="question"/> Enter a Question with Answer</h4> </td>
-           <td><h4><input type="radio" name="choice" value="ask"/> Ask the admin </h4></td>
-           <td> <h4><input type="radio" name="choice" value="obtain"/> Find the answers from existing questions </h4></td>
+           <td><h3> <input type="radio" name="choice" value="question"/> Enter a Question with Answer</h3> </td>
+           <td><h3><input type="radio" name="choice" value="ask"/> Ask the admin </h3></td>
+           <td> <h3><input type="radio" name="choice" value="obtain"/> Find the answers from existing questions </h3></td>
            
             </tr>
             <tr>
             <td colspan="3"> <p> </p> </td>
             <td colspan="3"> <p> </p> </td>
-            </tr>
+            </tr><br/>
             <tr>
             <td colspan="3"><input type="submit" value="submit"/></td>
             <td colspan="3"> <h3> <a href="<%=request.getContextPath()%>/TroubleShootingDesk/logout.html"> Logout</a> </h3></td>

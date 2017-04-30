@@ -37,21 +37,21 @@ public class AdminService {
 
 	public String insert(HttpServletRequest request) {
 		String question = request.getParameter("question");
-		String answer =request.getParameter("answer");
+		String answer = request.getParameter("answer");
 		QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer();
 		questionAndAnswer.setQuestion(question);
 		questionAndAnswer.setAnswer(answer);
-		
-	int i=	informationObtainer.insertQuetion(questionAndAnswer);
-	String page="";
-	if(i==1){
-		request.setAttribute("success", "The post was done successfully");
-		page="create";
-	}else{
-		request.setAttribute("error", "There was a error in doing the post or the question already exists");
-		page="admin";
-	}
-	
+
+		int i = informationObtainer.insertQuetion(questionAndAnswer);
+		String page = "";
+		if (i == 1) {
+			request.setAttribute("success", "The post was done successfully");
+			page = "create";
+		} else {
+			request.setAttribute("error", "There was a error in doing the post or the question already exists");
+			page = "admin";
+		}
+
 		return page;
 	}
 
@@ -78,19 +78,6 @@ public class AdminService {
 	}
 
 	/**
-	 * 
-	 * @param request:
-	 *            creates a session object and loads the object of
-	 *            {@link QuestionAndAnswer} which is returned by getQuestions()
-	 *            of {@link InformationObtainer}
-	 */
-	public void back(HttpServletRequest request) {
-		HttpSession ses = request.getSession();
-		List<QuestionAndAnswer> qAndA = informationObtainer.getQuestions();
-		ses.setAttribute("Hardware", qAndA);
-	}
-
-	/**
 	 * : logs out of the session by invalidating the session
 	 * 
 	 * @param request
@@ -105,8 +92,8 @@ public class AdminService {
 	 * 
 	 * @param question
 	 *            is a string read from Query String called from MainClass it
-	 *            calls getHardwareAnswer of {@link InformationObtainer} and
-	 *            sets them to the request attribute and returns int.
+	 *            calls getsAnswer of {@link InformationObtainer} and sets them
+	 *            to the request attribute and returns int.
 	 * @param request
 	 * @return
 	 */
@@ -119,52 +106,30 @@ public class AdminService {
 	}
 
 	/**
-	 * it is called from MainClass it reads the values from the request object
-	 * and calls {@link InformationObtainer} updteValues method which returns a
-	 * int. based on the value returned this method takes the decision and
-	 * places it in the request object
+	 * this method is called from mainClass and it returns the page of the
+	 * choice made
 	 * 
 	 * @param request
 	 * @return
 	 */
 
-	
-
-	public  String submitAns(HttpServletRequest request) {
-		String ans = request.getParameter("answer");
-		String question  = request.getParameter("question");
-		QuestionAndAnswer qa = new QuestionAndAnswer();
-		qa.setAnswer(ans);
-		qa.setQuestion(question);
-		int i =informationObtainer.submitAns(qa);
-		String page ="";
-		if(i==1){
-			request.setAttribute("success", "The answer has been submitted to the question");
-			page="admin";
-		}else{
-			request.setAttribute("error", "There was a error in submitting the answer");
-			page="admin";
-		}
-		return page;
-	}
-
 	public String choice(HttpServletRequest request) {
 		String str = request.getParameter("choice");
 		HttpSession ses = request.getSession();
 		ses.setAttribute("request", str);
-		String page ="";
-		if("users".equalsIgnoreCase(str)){
+		String page = "";
+		if ("users".equalsIgnoreCase(str)) {
 			List<User> list = informationObtainer.getUsers();
 			request.setAttribute("user", list);
-			page="users";
+			page = "users";
 		}
-		if("Question".equalsIgnoreCase(str)){
+		if ("Question".equalsIgnoreCase(str)) {
 			List<QuestionGetter> list = informationObtainer.getQuestion();
 			System.out.println("unanswered");
 			request.setAttribute("question", list);
-			page="getQuestion";
+			page = "getQuestion";
 		}
-		if("questions".equalsIgnoreCase(str)){
+		if ("questions".equalsIgnoreCase(str)) {
 			List<QuestionGetter> list = informationObtainer.getQuestionsUnAnswered();
 			request.setAttribute("question", list);
 			page = "questions";
@@ -172,29 +137,43 @@ public class AdminService {
 		return page;
 	}
 
+	/**
+	 * This method creates a model object and calls informationObtainer and
+	 * returns a page
+	 * 
+	 * @param request
+	 * @return
+	 */
+
 	public String addAnswer(HttpServletRequest request) {
 		String question = request.getParameter("question");
-		System.out.println(question);
 		String answer = request.getParameter("answer");
-		System.out.println(answer);
 		QuestionAndAnswer qa = new QuestionAndAnswer();
 		qa.setQuestion(question);
 		qa.setAnswer(answer);
-		int i =informationObtainer.addAnswersAdmin(qa);
-		String page="";
-		if(i==1){
+		int i = informationObtainer.addAnswersAdmin(qa);
+		String page = "";
+		if (i == 1) {
 			request.setAttribute("success", "The answer has been successfully posted");
-			page="admin";
-		}else{
+			page = "admin";
+		} else {
 			request.setAttribute("error", "The answer already exists, please try again");
-			page="admin";
-			
+			page = "admin";
+
 		}
 		return page;
 	}
 
+	/**
+	 * This method obtains the question to be deleted and deleted the question
+	 * 
+	 * @param request
+	 * @param delete
+	 * @return
+	 */
+
 	public String delQuestion(HttpServletRequest request, String delete) {
-		
+
 		int i = informationObtainer.deleteQues(delete);
 		if (i == 1) {
 			List<QuestionGetter> list = informationObtainer.getQuestionsUnAnswered();
@@ -202,6 +181,14 @@ public class AdminService {
 		}
 		return "questions";
 	}
+
+	/**
+	 * This method obtains the question to be deleted and deleted the question
+	 * 
+	 * @param delete:
+	 * @param request
+	 * @return
+	 */
 
 	public String deleteQues(String delete, HttpServletRequest request) {
 		int i = informationObtainer.deleteQuestion(delete);
@@ -212,50 +199,67 @@ public class AdminService {
 		return "getQuestion";
 	}
 
-	
+	/**
+	 * This method returns updateAns page
+	 * 
+	 * @param wanted
+	 * @return
+	 */
+
 	public String updateValue(String wanted) {
-		
+
 		return "updateAns";
 	}
 
+	/**
+	 * This method gets request and creates a model class object and calls
+	 * informationObtainer
+	 * 
+	 * @param request
+	 * @return
+	 */
 	public String updateAnswers(HttpServletRequest request) {
-		int id= Integer.parseInt(request.getParameter("id"));
+		int id = Integer.parseInt(request.getParameter("id"));
 		String answer = request.getParameter("answer");
 		QuestionsAnswer qa = new QuestionsAnswer();
 		qa.setId(id);
 		qa.setAnswer(answer);
-		int i= informationObtainer.updateAnswer(qa);
-		String page ="";
-		if(i==1){
+		int i = informationObtainer.updateAnswer(qa);
+		String page = "";
+		if (i == 1) {
 			request.setAttribute("success", "The answer has been updated successfully");
-			page="admin";
-		}else{
+			page = "admin";
+		} else {
 			request.setAttribute("error", "The answer cannot be updated, please try again");
-			page="admin";
-			
+			page = "admin";
+
 		}
 		return page;
 	}
 
-	public String delQuestion(HttpServletRequest request) {
-		
-		return null;
-	}
+	/**
+	 * 
+	 * @param request
+	 *            obtains request object from MainClass and adds the request
+	 *            parameters to model object and calls
+	 *            {@link InformationObtainer} to delete answer
+	 * @return
+	 */
 
 	public String delAnswer(HttpServletRequest request) {
 		QuestionsAnswer qa = new QuestionsAnswer();
 		qa.setId(Integer.parseInt(request.getParameter("id")));
 		System.out.println(qa.getId());
 		qa.setAnswer(request.getParameter("wanted"));
-		int  i = informationObtainer.delAnswer(qa);
-		String page ="";
-		if(i==1){
+		int i = informationObtainer.delAnswer(qa);
+		String page = "";
+		if (i == 1) {
 			request.setAttribute("success", "The answer has been successfully deleted");
-			page="admin";
-		}else{
+			page = "admin";
+		} else {
 			request.setAttribute("error", "The answer cannot be deleted, please try again");
-			page="admin";
-			
+			page = "admin";
+
 		}
 		return "admin";
 	}

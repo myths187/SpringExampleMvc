@@ -62,6 +62,11 @@ public class UserServices {
 		return list;
 
 	}
+	/**
+	 * this method helps in inserting question and answer 
+	 * @param questionAndAnswer
+	 * @return
+	 */
 	public int insertQuetion(QuestionAndAnswer questionAndAnswer) {
 		String question = questionAndAnswer.getQuestion();
 		String answer = questionAndAnswer.getAnswer();
@@ -83,6 +88,11 @@ public class UserServices {
 		return j;
 	}
 	}
+	/**helps in inserting question in queryQuestion
+	 * 
+	 * @param getQuestion
+	 * @return
+	 */
 	public int insertQuestion(QuestionGetter getQuestion) {
 		String question = getQuestion.getQuestion();
 		String query1 = "select count(*) from question where question like '"+question+"'";
@@ -102,6 +112,11 @@ public class UserServices {
 		
 		return j;
 	}
+	/**
+	 * Helps to add answers to existing question
+	 * @param qa
+	 * @return
+	 */
 	public int addAnswers(QuestionAndAnswer qa) {
 		String query = "select count(*) from answers where answers like '"+qa.getAnswer()+"' and fk =(select id from question where question like '"+qa.getQuestion()+"')";
 		int res = jdbcTemplate.queryForObject(query, Integer.class);

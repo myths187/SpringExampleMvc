@@ -73,7 +73,6 @@ public class UserController {
 	public ModelAndView register(@Valid @ModelAttribute("loginFormBackingObject")Register register, BindingResult result,HttpServletRequest request, HttpServletResponse response){
 		String next ="";
 		if (result.hasErrors()) {
-			 System.out.println("yes");
 			next="register";		 
 		} else  {
 			next=userService.register(register, request);
@@ -92,25 +91,42 @@ public class UserController {
 	public ModelAndView getRegister(HttpServletRequest request, HttpServletResponse response){
 		return new ModelAndView("register","loginFormBackingObject",new Register());
 	}
-	 
+	 /**
+	  * 
+	  * @param request: request is obtained from ask page and returns page returned by userService
+	  * @return
+	  */
 		@RequestMapping(value="/ask", method=RequestMethod.POST)
 		public ModelAndView ask(HttpServletRequest request){
 			return new ModelAndView(userService.ask(request));
 		}
 	
-
+/**
+ * 
+ * @param request: obtains request from question page and returns page returned by userServices
+ * @return
+ */
 	@RequestMapping(value = "/InsertQuestion", method = RequestMethod.POST)
 	public ModelAndView insertQuestion(HttpServletRequest request){
 		return new ModelAndView(userService.insertQuestion(request));
 	}
+	/**
+	 * 
+	 * @param request: obtain request from answer page and returns addAnswer page
+	 * @return
+	 */
 
 	@RequestMapping(value = "/addAnswer", method = RequestMethod.GET)
 	public ModelAndView addAnswer(HttpServletRequest request){
 		return new ModelAndView("addAnswer");
 	}
+	/**
+	 * 
+	 * @param request: obtains request from addAnswers page and returns page returned by userService
+	 * @return
+	 */
 	@RequestMapping(value = "/addAnswers", method = RequestMethod.GET)
 	public ModelAndView addAnswers(HttpServletRequest request){
-		System.out.println("in add answers");
 		return new ModelAndView(userService.addAnswers(request));
 	}
 

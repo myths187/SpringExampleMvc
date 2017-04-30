@@ -46,24 +46,7 @@ public class ConnectionEstablisher {
 				+ login.getPassword() + "'";
 		return jdbcTemplate.queryForObject(query, String.class);
 	}
-	/**
-	 * This method obtains the question and answers from the database
-	 * and adds the object obtained to the list and returns the list object
-	 * @return
-	 */
-	@SuppressWarnings("rawtypes")
-	public List getQuestions() {
-		final List<QuestionAndAnswer> list = new ArrayList<QuestionAndAnswer>();
-		String query = "select question,answer from hardware_tab ";
-		List<Map<String, Object>> rows = jdbcTemplate.queryForList(query);
-		for (Map row : rows) {
-			QuestionAndAnswer q = new QuestionAndAnswer();
-			q.setQuestion((String) row.get("question"));
-			q.setAnswer((String) row.get("answer"));
-			list.add(q);
-		}
-		return list;
-	}
+	
 	/**
 	 * This method obtains information from the register object and inserts the data into the table,
 	 * if there is any problem in inserting the values it deletes the process of insert.

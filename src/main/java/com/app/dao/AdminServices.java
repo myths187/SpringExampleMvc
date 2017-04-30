@@ -25,39 +25,8 @@ public class AdminServices {
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
-/**
- * 
- * @param question
- * @param soft
- * @param hard
- * this method is called from information obtainer.
- * @return  : integer
- */
-	public int insertRecords(String question, String soft, String hard) {
-		String quest = "select count(*) from hardware_tab where question like '"+question+"'";
-		int res = jdbcTemplate.queryForObject(quest, Integer.class);
-		if(res == 1){
-			return 0;
-		}else{
-			
-		int i = 0;
-		int j = 0;
-		String query = "select count(*) from hardware_tab";
-		int a = jdbcTemplate.queryForObject(query, Integer.class);
-		a = a + 1;
-		i = jdbcTemplate.update("insert into hardware_tab values (" + a + " ,'" + question + "' , '" + hard + "')");
 
-		if (i != 0) {
-			String query1 = "select count(*) from software_tab";
-			int b = jdbcTemplate.queryForObject(query1, Integer.class);
-			b = b + 1;
-			j = jdbcTemplate.update("insert into software_tab values (" + b + " ,'" + question + "' , '" + soft
-					+ "' , ( select id from hardware_tab where question like '" + question + "'))");
-		}
-
-		return j;
-	}
-	}
+	
 	/**
 	 * this method deletes the records
 	 * @param delete
@@ -90,19 +59,14 @@ public class AdminServices {
 		for (@SuppressWarnings("rawtypes") Map row : res) {
 			QuestionsAnswer qa = new QuestionsAnswer();
 			qa.setId((Integer) row.get("id"));
-			System.out.println(qa.getId());
 			qa.setAnswer((String) row.get("answers"));
-			System.out.println(qa.getAnswer());
 			list.add(qa);
 		}
 			return list;
 	}
 	/**
-	 * This method updates the values in the database 
-	 * @param id
-	 * @param hardAns
-	 * @param softAns
-	 * @return : integer
+	 *  This method returns the users
+	 * @return
 	 */
 	public List<User> getUsers() {
 		List<User> list = new ArrayList();
@@ -112,12 +76,15 @@ public class AdminServices {
 		for (@SuppressWarnings("rawtypes") Map row : res) {
 			User user = new User();
 			user.setUserName((String) row.get("username"));
-			System.out.println(user.getUserName());
 		list.add(user);
 		}
 		
 		return list;
 	}
+	/**
+	 * thsi method returns list of qustions
+	 * @return
+	 */
 	public List<QuestionGetter> getQuestions() {
 		List<QuestionGetter> list = new ArrayList();
 		String query = "select question from queryquestion";
@@ -131,10 +98,11 @@ public class AdminServices {
 		
 		return list;
 	}
-	public int submitAns(QuestionAndAnswer qa) {
-		
-		return 0;
-	}
+	/**
+	 * Adds Question and Answer
+	 * @param qa
+	 * @return
+	 */
 	public int addAnswer(QuestionAndAnswer qa) {
 		String queryQ = "select count(*) from question where question like ' "+qa.getQuestion()+"'";
 		int resQ = jdbcTemplate.queryForObject(queryQ, Integer.class);
@@ -147,7 +115,6 @@ public class AdminServices {
 		}
 		String query = "select count(*) from answers where answers like '"+qa.getAnswer()+"'";
 		int res = jdbcTemplate.queryForObject(query, Integer.class);
-		System.out.println(res);
 		int j =0;
 		if(res >=1){
 			return 0;
@@ -156,29 +123,48 @@ public class AdminServices {
 					+ "' , ( select id from question where question like '" + qa.getQuestion() + "'))");
 		 query = "delete from queryQuestion where question like '"+qa.getQuestion()+"'";
 			j=jdbcTemplate.update(query);
-			System.out.println(j+"****");
 		}
 		
 			
 		
 		return j;
 	}
+	/**
+	 * deletes question from questionquery
+	 * @param delete
+	 * @return
+	 */
 	public int deleteQues(String delete) {
 		String query = "delete from queryQuestion where question like '"+delete+"'";
 		int i=jdbcTemplate.update(query);
 				
 		return i;
 	}
+	/**
+	 * deletes question from question
+	 * @param delete
+	 * @return
+	 */
 	public int deleteQuestion(String delete) {
 		String query = "delete from Question where question like '"+delete+"'";
 		int i=jdbcTemplate.update(query);
 		return i;		
 	}
+	/**
+	 * updates answer
+	 * @param qa
+	 * @return
+	 */
 	public int updateAnswer(QuestionsAnswer qa) {
 		String query = "update answers set answers ='"+qa.getAnswer()+"' where id ='"+qa.getId()+"'";
 		int i = jdbcTemplate.update(query);
 		return i;
 	}
+	/**
+	 * deletes answer
+	 * @param qa
+	 * @return
+	 */
 	public int delAns(QuestionsAnswer qa) {
 		String query = " delete from answers where answers like '"+qa.getAnswer()+"' or id ="+qa.getId()+"";
 		int i =jdbcTemplate.update(query);

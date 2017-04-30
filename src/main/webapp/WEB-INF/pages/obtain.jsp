@@ -94,9 +94,9 @@ input[type=submit] {
 							%>
 
 					<tr>
-						<td><input type="radio" name="wanted"
+						<td><h3><input type="radio" name="wanted"
 							value="<%= a.getQuestion() %>"> &nbsp; &nbsp; <c:out
-								value="<%=a.getQuestion() %>" /> <br /></td>
+								value="<%=a.getQuestion() %>" /> <br /></h3></td>
 					</tr>
 					<% 
 								

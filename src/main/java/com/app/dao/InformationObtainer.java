@@ -61,16 +61,7 @@ public class InformationObtainer {
 		return i;
 
 	}
-	/**
-	 * This method obtains a list of {@link QuestionAndAnswer} from {@link ConnectionEstablisher}
-	 * @return
-	 */
-
-	@SuppressWarnings("unchecked")
-	public List<QuestionAndAnswer> getQuestions() {
-		return connectionEstablisher.getQuestions();
-
-	}
+	
 	/**
 	 * this method tries to delete a entry through String
 	 * @param delete
@@ -80,17 +71,7 @@ public class InformationObtainer {
 	public int delete(String delete) {
 		return adminServices.delete(delete);
 	}
-	/**
-	 * This methods tries to insert records into the database
-	 * @param question
-	 * @param soft
-	 * @param hard
-	 * @return
-	 */
-
-	public int insertRecords(String question, String soft, String hard) {
-		return adminServices.insertRecords(question, soft, hard);
-	}
+	
 	/**
 	 * This method obtains {@link QuestionsAnswer} object from {@link AdminServices}
 	 * @param question
@@ -138,59 +119,96 @@ public class InformationObtainer {
 		int i = connectionEstablisher.register(register);
 		return i;
 	}
+	/**
+	 * 
+	 * @param questionAndAnswer : calls userService insertQuetion method
+	 * @return
+	 */
 
 	public int insertQuetion(QuestionAndAnswer questionAndAnswer) {
 		int i =userServices.insertQuetion(questionAndAnswer) ;
 		return i;
 	}
+	/**
+	 * calls user service insertQuestion method
+	 * @param getQuestion
+	 * @return
+	 */
 
 	public int insertQuestion(QuestionGetter getQuestion) {
 		int i = userServices.insertQuestion(getQuestion);
 		return i;
 	}
-
+/**
+ *  used to add extra ansers
+ * @param qa
+ * @return
+ */
 	public int addAnswers(QuestionAndAnswer qa) {
 		int i = userServices.addAnswers(qa);
 		return i;
 	}
-
+/**
+ * obtains list of users
+ * @return
+ */
 	public List getUsers() {
 		List list = adminServices.getUsers();
 		return list;
 	}
-
+/**
+ * returns list of questions
+ * @return
+ */
 	public List<QuestionGetter> getQuestionsUnAnswered() {
 		
 		return adminServices.getQuestions();
 	}
 
-	public int submitAns(QuestionAndAnswer qa) {
-		return adminServices.submitAns(qa);
-		
-	}
-
+/**
+ * Add answers made by admin
+ * @param qa
+ * @return
+ */
 
 
 	public int addAnswersAdmin(QuestionAndAnswer qa) {
 		int i = adminServices.addAnswer(qa);
 		return i;
 	}
-
+/**
+ * deletes the existing questions
+ * @param delete
+ * @return
+ */
 	public int deleteQues(String delete) {
 		int i = adminServices.deleteQues(delete) ;
 		return i;
 	}
+	/**
+	 * deletes existing questions
+	 * @param delete
+	 * @return
+	 */
 
 	public int deleteQuestion(String delete) {
 		int i = adminServices.deleteQuestion(delete) ;
 		return i;
 	}
-
+/**
+ * helps in updating answer
+ * @param qa
+ * @return
+ */
 	public int updateAnswer(QuestionsAnswer qa) {
 		int i = adminServices.updateAnswer(qa);
 		return i;
 	}
-
+/**
+ * helps in deleting answer
+ * @param qa
+ * @return
+ */
 	public int delAnswer(QuestionsAnswer qa) {
 		int i = adminServices.delAns(qa);
 		return i;

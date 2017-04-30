@@ -29,8 +29,8 @@ public class UserService {
 	/**
 	 * 
 	 * @param request
-	 * @return: decides on the choice made by the user and obtains he list of Questions from 
-	 * {@link InformationObtainer} and returns respective pages to the user by placing the questions in request.
+	 * @return: decides on the choice made by the user 
+	 * and returns respective pages to the user by placing the questions in request.
 	 */
 
 	public String getChoice(HttpServletRequest request) {
@@ -55,7 +55,8 @@ public class UserService {
 	/**
 	 * 
 	 * @param request
-	 * @return : obtains the answers based on the selected question, first this method reads the choice made 
+	 * @return : obtains the answers based on the selected question,
+	 *  first this method reads the choice made 
 	 * by the user and then the question choice took, later it assigns the answer to request
 	 * ans then returns the answer page which renders the answer
 	 */
@@ -101,6 +102,11 @@ public class UserService {
 		}
 		return next;
 	}
+	/**
+	 * This method helps the user to insert the question, creates a model object and calles insertQuestion method
+	 * @param request
+	 * @return
+	 */
 	public String insertQuestion(HttpServletRequest request) {
 		String question = request.getParameter("question");
 		String answer =request.getParameter("answer");
@@ -119,10 +125,13 @@ public class UserService {
 	}
 		return page;
 	}
+	/**
+	 * This method creates model object and tries to insert question using informationObtainer
+	 * @param request
+	 * @return
+	 */
 	public String ask(HttpServletRequest request) {
 		String question = request.getParameter("question");
-		System.out.println(question);
-		
 		QuestionGetter getQuestion = new QuestionGetter();
 		getQuestion.setQuestion(question);
 	int i =	informationObtainer.insertQuestion(getQuestion);
@@ -136,11 +145,15 @@ public class UserService {
 	}
 		return page;
 	}
+	/**
+	 * This method allows the user to insert more answers and it creates a model object 
+	 * and calls informationObtainer method
+	 * @param request
+	 * @return
+	 */
 	public String addAnswers(HttpServletRequest request) {
 		String question = request.getParameter("question");
-		System.out.println(question);
 		String answer = request.getParameter("answer");
-		System.out.println(answer);
 		QuestionAndAnswer qa = new QuestionAndAnswer();
 		qa.setQuestion(question);
 		qa.setAnswer(answer);
