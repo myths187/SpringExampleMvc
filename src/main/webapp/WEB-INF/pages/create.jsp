@@ -101,11 +101,12 @@ textarea {
                     </p>
                    <b>
                    <b> <a href="<%=request.getContextPath()%>/TroubleShootingDesk/back.html">back</a> &nbsp; &nbsp; &nbsp; </b>
-                    <input type="submit" value="submit" />
+                    <input type="submit" value="submit" />&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+                     <b><a href="<%=request.getContextPath()%>/TroubleShootingDesk/logout.html"> Logout</a> </b>
                 </div>
             </div>
         </form>
-        <b><a href="<%=request.getContextPath()%>/TroubleShootingDesk/logout.html"> Logout</a> </b>
+       
     </body>
 
     </html>

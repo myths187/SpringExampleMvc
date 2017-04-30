@@ -41,6 +41,7 @@ public class UserService {
 		if("question".equalsIgnoreCase(str)){
 			page="question";
 		}
+		
 		if("ask".equalsIgnoreCase(str)){
 			page="ask";
 		}
