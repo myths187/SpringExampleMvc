@@ -86,10 +86,11 @@ public class AdminServices {
 		String query1 =  "select id,answers from answers where fk = ( select id from question where question like '"+question+"')";
 		List list = new ArrayList();
 		List<Map<String, Object>>  res= jdbcTemplate.queryForList(query1);
-		QuestionsAnswer qa = new QuestionsAnswer();
+		
 		for (@SuppressWarnings("rawtypes") Map row : res) {
-			
+			QuestionsAnswer qa = new QuestionsAnswer();
 			qa.setId((Integer) row.get("id"));
+			System.out.println(qa.getId());
 			qa.setAnswer((String) row.get("answers"));
 			System.out.println(qa.getAnswer());
 			list.add(qa);
@@ -103,18 +104,6 @@ public class AdminServices {
 	 * @param softAns
 	 * @return : integer
 	 */
-	public int updateValues(int id, String hardAns, String softAns) {
-		int i = 0;
-		int j =0;
-		
-			i = jdbcTemplate.update("update hardware_tab set answer='"+hardAns+"' where id="+id);
-			if(i ==1){
-				j = jdbcTemplate.update("update software_tab set answer='"+softAns+"' where link="+id);
-			}
-		
-		return j;
-
-	}
 	public List<User> getUsers() {
 		List<User> list = new ArrayList();
 		String query = "select username from login where auth like 'user'";
@@ -152,10 +141,7 @@ public class AdminServices {
 		if(resQ >=1){
 			return 0;
 		}
-		queryQ = "select count(*) from question";
-		int a = jdbcTemplate.queryForObject(queryQ, Integer.class);
-		a = a + 1;
-		int i = jdbcTemplate.update("insert into question values (" + a + " ,'" + qa.getQuestion() + "')");
+		int i = jdbcTemplate.update("insert into question (question) values ('" + qa.getQuestion() + "')");
 		if(i==0){
 			return 0;
 		}
@@ -166,10 +152,7 @@ public class AdminServices {
 		if(res >=1){
 			return 0;
 		}else{
-			String query1 = "select count(*) from answers";
-			int b = jdbcTemplate.queryForObject(query1, Integer.class);
-			b = b + 1;
-		j = jdbcTemplate.update("insert into answers values (" + b + " ,'" + qa.getAnswer()
+		j = jdbcTemplate.update("insert into answers(answers,fk) values ('" + qa.getAnswer()
 					+ "' , ( select id from question where question like '" + qa.getQuestion() + "'))");
 		 query = "delete from queryQuestion where question like '"+qa.getQuestion()+"'";
 			j=jdbcTemplate.update(query);
@@ -190,6 +173,17 @@ public class AdminServices {
 		String query = "delete from Question where question like '"+delete+"'";
 		int i=jdbcTemplate.update(query);
 		return i;		
+	}
+	public int updateAnswer(QuestionsAnswer qa) {
+		String query = "update answers set answers ='"+qa.getAnswer()+"' where id ='"+qa.getId()+"'";
+		int i = jdbcTemplate.update(query);
+		return i;
+	}
+	public int delAns(QuestionsAnswer qa) {
+		String query = " delete from answers where answers like '"+qa.getAnswer()+"' or id ="+qa.getId()+"";
+		int i =jdbcTemplate.update(query);
+		
+		return i;
 	}
 	
 

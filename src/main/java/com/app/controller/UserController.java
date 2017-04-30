@@ -2,14 +2,20 @@ package com.app.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import com.app.model.Login;
+import com.app.model.Register;
 import com.app.service.UserService;
 /**
  * this controller bean maps request for UserTroubleShootingDesk and performs functions of the user like register,
@@ -64,8 +70,17 @@ public class UserController {
 	 * @return : returns the page returned by the userService method.
 	 */
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public ModelAndView register(HttpServletRequest request, HttpServletResponse response){
-		return new ModelAndView(userService.register(request));
+	public ModelAndView register(@Valid @ModelAttribute("loginFormBackingObject")Register register, BindingResult result,HttpServletRequest request, HttpServletResponse response){
+		String next ="";
+		if (result.hasErrors()) {
+			 System.out.println("yes");
+			next="register";		 
+		} else  {
+			next=userService.register(register, request);
+		}
+		
+		
+		return new ModelAndView(next);
 	}
 	/**
 	 * 
@@ -75,7 +90,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/getRegister", method=RequestMethod.GET)
 	public ModelAndView getRegister(HttpServletRequest request, HttpServletResponse response){
-		return new ModelAndView("register");
+		return new ModelAndView("register","loginFormBackingObject",new Register());
 	}
 	 
 		@RequestMapping(value="/ask", method=RequestMethod.POST)

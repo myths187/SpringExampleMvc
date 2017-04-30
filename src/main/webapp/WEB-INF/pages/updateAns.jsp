@@ -70,18 +70,20 @@ div.box input[type=text] {
 				<img src="/SpringExampleMvc/images/icon6.jpg" width="50" height="50" />Welcome
 				to TroubleShooting Desk!
 			</h1>
-			<form action="<%=request.getContextPath()%>/UserTroubleShootingDesk/addAnswers.html" method="get">
+			<form action="<%=request.getContextPath()%>/TroubleShootingDesk/updateAnswers.html" method="get">
 				<h1>
 					<img src="/SpringExampleMvc/images/icon1.png" width="100px" height="100px">Enter the Answer here
 				</h1>
-
-				<p>The Question Selected is :</p>
-				<input type="text" value="<%=session.getAttribute("question")%>"
-					name="question" width="100" readonly> <br />
-				<p>The Relevant Solution is :</p>
-				<input type="text" name="answer" width="100"> <br />
+				<p>The Answer Selected is :</p>
+				<input type="text" value="<%=request.getAttribute("Answer")%>"
+					 width="100" readonly> <br />
+					 <input type="hidden" name="id" value="<%= request.getAttribute("id") %>"/>
+				<p>The Updated Solution is :</p>
+				<input type="text" name="answer" width="100" required> <br />
 			
-				<input type="submit" value="submit" /> <b> <a
+				<input type="submit" value="submit" /> <b>  <br/>
+				<a href="<%=request.getContextPath()%>/TroubleShootingDesk/back.html">back</a>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a
 					href="<%=request.getContextPath()%>/TroubleShootingDesk/logout.html">
 						Logout</a>
 				</b>

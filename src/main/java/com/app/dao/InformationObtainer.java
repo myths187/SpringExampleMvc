@@ -108,9 +108,7 @@ public class InformationObtainer {
 	 * @return
 	 */
 
-	public int updateValues(int id, String hardAns, String softAns) {
-		return adminServices.updateValues(id, hardAns, softAns);
-	}
+	
 	/**
 	 * This method obtains questions  based on type of String pased
 	 * @param string
@@ -185,6 +183,16 @@ public class InformationObtainer {
 
 	public int deleteQuestion(String delete) {
 		int i = adminServices.deleteQuestion(delete) ;
+		return i;
+	}
+
+	public int updateAnswer(QuestionsAnswer qa) {
+		int i = adminServices.updateAnswer(qa);
+		return i;
+	}
+
+	public int delAnswer(QuestionsAnswer qa) {
+		int i = adminServices.delAns(qa);
 		return i;
 	}
 

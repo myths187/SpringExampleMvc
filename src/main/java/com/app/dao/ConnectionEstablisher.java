@@ -74,13 +74,13 @@ public class ConnectionEstablisher {
 		int res = 0;
 		int i = jdbcTemplate.update("insert into customer(firstname, lastName, email, username, password) values ('"
 				+ register.getFirstName() + "' ,'" + register.getLastName() + "' , '" + register.getEmail() + "','"
-				+ register.getUserName() + "','" + register.getPwd1() + "')");
+				+ register.getUserName() + "','" + register.getPassword() + "')");
 		if (i == 1) {
 			int id = jdbcTemplate.queryForObject(
 					"select id from customer where username like '" + register.getUserName() + "'", Integer.class);
 			int j = jdbcTemplate
 					.update("insert into login(username, password, auth, userid) values('" + register.getUserName()
-							+ "','" + register.getPwd1() + "','" + register.getAuth() + "'," + id + ")");
+							+ "','" + register.getPassword() + "','" + register.getAuth() + "'," + id + ")");
 			if (j == 1) {
 				res = 1;
 
@@ -90,6 +90,7 @@ public class ConnectionEstablisher {
 			res = 0;
 
 		}
+		System.out.println("res from register"+res);
 		return res;
 	}
 

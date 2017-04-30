@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.app.dao.InformationObtainer;
 import com.app.model.QuestionAndAnswer;
 import com.app.model.QuestionGetter;
+import com.app.model.Register;
 /**
  * 
  * This bean obtains the choices made by the user, makes back decision, gets Answers to the user,
@@ -22,7 +23,7 @@ public class UserService {
 	InformationObtainer informationObtainer;
 	
 	@Autowired
-	RegisterValidate registerValidate;
+	LoginService loginService;
 	
 	
 	/**
@@ -84,12 +85,20 @@ public class UserService {
 	}
 	/**
 	 * 
+	 * @param register 
 	 * @param request
 	 * @return : calls validate method of registerValidate class and returns the page in string format
 	 */
-	public String register(HttpServletRequest request) {
+	public String register(Register register, HttpServletRequest request) {
 		
-		return registerValidate.doValidate(request);
+		int i=loginService.register(register);
+		String next="";
+		if(i==1){
+			next="login";
+		}else{
+			next="error";
+		}
+		return next;
 	}
 	public String insertQuestion(HttpServletRequest request) {
 		String question = request.getParameter("question");

@@ -74,13 +74,7 @@ textarea {
 </head>
 
 <body>
-	<%
-		String name = null;
-		if (session.getAttribute("name") == null) {
-			response.sendRedirect("login.jsp");
-		} else
-			name = (String) session.getAttribute("name");
-	%>
+	
 	<!-- need to define ajax calls and js code -->
 	<div class="background">
 		<div class="box">
@@ -90,7 +84,7 @@ textarea {
 			</h1>
 			<h1>
 				<img src="/SpringExampleMvc/images/icon16.png" width="100px" height="100px"
-					display="inline">Welcome &nbsp; &nbsp;<%=name%>!! to Admin
+					display="inline">Welcome &nbsp; &nbsp;<%=session.getAttribute("name")%>!! to Admin
 				Desk!
 				<p>
 				<b> <%
@@ -124,11 +118,12 @@ textarea {
 			<input type="radio" name="choice" value="Question" /> List Answered Questions	
 
 
-				 <b> <a
+				
+					<input type="submit" value="submit"/> <br/>
+					 <b> <a
 						href="/SpringExampleMvc/TroubleShootingDesk/logout.html">
 							Logout</a>
 					</b>
-					<input type="submit" value="submit"/>
 					</form>
 				</div>
 		</div>

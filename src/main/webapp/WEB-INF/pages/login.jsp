@@ -2,6 +2,8 @@
 	<jsp:setProperty name="form" property="*" />
 </jsp:useBean>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -11,7 +13,7 @@
 <link href="/SpringExampleMvc/styles.css" rel="stylesheet" />
 <link rel="icon" href="/SpringExampleMvc/images/icon2.png" type="image/png"
 	sizes="16x16">
-<script>
+<!-- <script>
 	function validateForm() {
 	   
 		var uname = document.getElementById("id1").value;
@@ -33,33 +35,20 @@
 			return true;
 		}
 	}
-</script>
+</script> -->
 
 </head>
 
 
 <body>
-	<form action="<%= request.getContextPath() %>/TroubleShootingDesk/Login.html" method="post" onsubmit=" validateForm();">
+		<form:form method="POST" action="/SpringExampleMvc/TroubleShootingDesk/Login.html" commandName="loginFormBackingObject">
+		
 		<div class="background1">
 			<div class="box">
 				<h1 id="h1">
 					<img src="/SpringExampleMvc/images/icon6.jpg" width="50" height="50" />Welcome
 					to TroubleShooting Desk!
 				</h1>
-				<%
-					String[] errors = (String[]) request.getAttribute("errors");
-					if (errors != null && errors.length > 0) {
-				%>
-				<b>Please Correct the Following Errors</b>
-				<ul>
-					<%
-						for (int i = 0; i < errors.length; i++) {
-					%>
-					<li><%=errors[i]%> <%
- 	}
- %> <%
- 	}
- %>
 						<table align="center" cellpadding="10" border="0">
 							<tbody>
 								<tr>
@@ -68,16 +57,16 @@
 
 									<th>Enter User Name :</th>
 
-									<td><input id="id1" type="text" name="username"
-										placeholder="enter username" required/> <span id="span1"></span>
+									<td><form:input path="userName"
+										placeholder="enter username"/></span> <span><form:errors path="userName" cssStyle="color: #ff0000;" /></span>
 									<td rowspan=3><img src="/SpringExampleMvc/images/icon19.jpg"></td>
 
 									</td>
 								</tr>
 								<tr>
 									<th>Enter Password :</th>
-									<td><input id="id2" type="password" name="password"
-										placeholder="Password" required/> <span id="span2"></span></td>
+									<td><form:password path="password"
+										placeholder="Password" /><form:errors path="password" cssStyle="color: #ff0000;"/></span></td>
 								</tr>
 								<tr>
 									<td colspan="2" align="center"><input type="submit" name="submit"/> <br />
@@ -88,7 +77,8 @@
 						</table>
 			</div>
 		</div>
-	</form>
+		</form:form>
+	<%-- </form> --%>
 </body>
 
 </html>

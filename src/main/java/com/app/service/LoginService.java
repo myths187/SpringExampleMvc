@@ -31,8 +31,10 @@ public class LoginService {
 	 *  is done as admin by authorize method of {@link InformationObtainer}.
 	 */
 	public String check(Login login, HttpServletRequest request) {
-	
+	System.out.println("entered check");
 		String page = "";
+		HttpSession ses = request.getSession();
+		ses.setAttribute("name", login.getUserName());
 
 		int i = informationObtainer.check(login);
 
@@ -40,9 +42,8 @@ public class LoginService {
 
 			String auth = informationObtainer.authorize(login);
 			if ("admin".equalsIgnoreCase(auth)) {
-				HttpSession ses = request.getSession();
-				List<QuestionAndAnswer> qAndA = informationObtainer.getQuestions();
-				ses.setAttribute("Hardware", qAndA);
+				/*List<QuestionAndAnswer> qAndA = informationObtainer.getQuestions();
+				ses.setAttribute("Hardware", qAndA);*/
 				page = "admin";
 			} else {
 				page = "user";
@@ -52,6 +53,7 @@ public class LoginService {
 			page = "error";
 			
 		}
+		System.out.println(page);
 
 		return page;
 	}

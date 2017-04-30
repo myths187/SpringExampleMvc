@@ -67,21 +67,14 @@
 </head>
 
 <body>
-<%
-String name = null;
-if(session.getAttribute("name") == null){
-	response.sendRedirect("login.jsp");
-}else name = (String) session.getAttribute("name");
 
-
-%>
 <form action ="<%=request.getContextPath()%>/UserTroubleShootingDesk/choice.html" method="get">
     <!-- need to define ajax calls and js code -->
     <div class="background">
         <div class="box">
          <h1 id="h1"> <img src="/SpringExampleMvc/images/icon6.jpg" width="50" height="50"/>Welcome to TroubleShooting Desk! </h1>
          
-            <h1><img src="/SpringExampleMvc/images/icon1.png" width="100px" height="100px" display="inline">Welcome &nbsp; &nbsp;<%=name %>!!</h1>
+            <h1><img src="/SpringExampleMvc/images/icon1.png" width="100px" height="100px" display="inline">Welcome &nbsp; &nbsp;<%=session.getAttribute("name") %>!!</h1>
                
               <b> <%if(request.getAttribute("error") != null){  %>
 					<%= request.getAttribute("error") %>
@@ -99,9 +92,9 @@ if(session.getAttribute("name") == null){
             <table align="center" border="0" padding="10">
            
             <tr>
-           <td> <input type="radio" name="choice" value="question"/> Enter a Question with Answer </td>
-           <td> <input type="radio" name="choice" value="ask"/> Ask the admin </td>
-           <td> <input type="radio" name="choice" value="obtain"/> Find the answers from existing questions </td>
+           <td><h4> <input type="radio" name="choice" value="question"/> Enter a Question with Answer</h4> </td>
+           <td><h4><input type="radio" name="choice" value="ask"/> Ask the admin </h4></td>
+           <td> <h4><input type="radio" name="choice" value="obtain"/> Find the answers from existing questions </h4></td>
            
             </tr>
             <tr>

@@ -73,16 +73,10 @@ public class UserServices {
 			
 		int i = 0;
 		int j = 0;
-		String query = "select count(*) from question";
-		int a = jdbcTemplate.queryForObject(query, Integer.class);
-		a = a + 1;
-		i = jdbcTemplate.update("insert into question values (" + a + " ,'" + question + "')");
+		i = jdbcTemplate.update("insert into question (question)values ('" + question + "')");
 
 		if (i != 0) {
-			String query1 = "select count(*) from answers";
-			int b = jdbcTemplate.queryForObject(query1, Integer.class);
-			b = b + 1;
-			j = jdbcTemplate.update("insert into answers values (" + b + " ,'" + answer
+			j = jdbcTemplate.update("insert into answers(answers,fk) values ('" + answer
 					+ "' , ( select id from question where question like '" + question + "'))");
 		}
 
@@ -109,17 +103,14 @@ public class UserServices {
 		return j;
 	}
 	public int addAnswers(QuestionAndAnswer qa) {
-		String query = "select count(*) from answers where answers like '"+qa.getAnswer()+"'";
+		String query = "select count(*) from answers where answers like '"+qa.getAnswer()+"' and fk =(select id from question where question like '"+qa.getQuestion()+"')";
 		int res = jdbcTemplate.queryForObject(query, Integer.class);
 		System.out.println(res);
 		int j =0;
 		if(res >=1){
 			return 0;
 		}else{
-			String query1 = "select count(*) from answers";
-			int b = jdbcTemplate.queryForObject(query1, Integer.class);
-			b = b + 1;
-		j = jdbcTemplate.update("insert into answers values (" + b + " ,'" + qa.getAnswer()
+		j = jdbcTemplate.update("insert into answers(answers,fk) values ('" + qa.getAnswer()
 					+ "' , ( select id from question where question like '" + qa.getQuestion() + "'))");
 		}
 		return j;

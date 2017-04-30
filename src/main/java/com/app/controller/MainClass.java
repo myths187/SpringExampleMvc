@@ -6,10 +6,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +22,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.app.model.Login;
 import com.app.service.AdminService;
 import com.app.service.LoginService;
-import com.app.service.Validate;
 
 /**
  * 
@@ -42,6 +44,11 @@ public class MainClass {
 
 	@Autowired
 	Login login;
+	
+	@RequestMapping(value="/loginPage", method=RequestMethod.GET)
+	public ModelAndView getLoginPage(){
+		return new ModelAndView("login","loginFormBackingObject",new Login());
+	}
 
 	/**
 	 * 
@@ -54,29 +61,31 @@ public class MainClass {
 	 * @throws IOException
 	 */
 	@RequestMapping(value = "/Login", method = RequestMethod.POST)
-	public ModelAndView login(HttpServletRequest request) throws ServletException, IOException {
+	public ModelAndView login(@Valid @ModelAttribute("loginFormBackingObject")Login login, BindingResult result,HttpServletRequest request) throws ServletException, IOException {
 
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
-		Validate valid = new Validate();
-		boolean flag = valid.validate(userName, password, request);
 		String next = "";
-		if (!flag) {
-
-			next = "login";
-		} else {
-
+		if (result.hasErrors()) {
+			 System.out.println("yes");
+			next="login";		 
+		} else  {
+			System.out.println("no");
 			HttpSession ses = request.getSession();
 			ses.setAttribute("name", userName);
-			login.setUserName(userName);
-			login.setPassword(password);
-
 			next = loginService.check(login, request);
+			//this.login(request);
+			System.out.println(next);
+			//return new ModelAndView(next);
 		}
-
 		return new ModelAndView(next);
 
 	}
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public ModelAndView login(HttpServletRequest request) throws ServletException, IOException {
+		return new ModelAndView(loginService.check(login, request));
+	}
+
 
 	/**
 	 * 
@@ -175,7 +184,7 @@ public class MainClass {
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request) throws ServletException, IOException {
 		adminService.logout(request);
-		return new ModelAndView("login");
+		return new ModelAndView("index");
 	}
 
 	/**
@@ -184,11 +193,9 @@ public class MainClass {
 	 */
 	@RequestMapping(value = "/updateValue", method = RequestMethod.GET)
 	public ModelAndView updateValue(	@RequestParam(value = "wanted", defaultValue = "", required = false) String wanted,HttpServletRequest request) throws ServletException, IOException {
-	//	adminService.updateValues(request);
-		System.out.println(wanted);
-		System.out.println(request.getParameter(wanted));
-
-		return new ModelAndView("admin");
+		request.setAttribute("id", request.getParameter("id"));
+		request.setAttribute("Answer", wanted);
+		return new ModelAndView(adminService.updateValue(wanted));
 
 	}
 
@@ -213,6 +220,11 @@ public class MainClass {
 		adminService.back(request);
 		return new ModelAndView("admin");
 	}
+	@RequestMapping(value = "/updateAnswers", method = RequestMethod.GET)
+	public ModelAndView updateAnswers(HttpServletRequest request) {
+		
+		return new ModelAndView(adminService.updateAnswers(request));
+	}
 
 	/*
 	 * @RequestMapping(value="/choice",method=RequestMethod.POST) public
@@ -228,6 +240,10 @@ public class MainClass {
 	public ModelAndView delQues(HttpServletRequest request,
 			@RequestParam(value = "question", defaultValue = "", required = false) String delete) {
 		return new ModelAndView(adminService.delQuestion(request, delete));
+	}
+	@RequestMapping(value = "/deleteAns", method = RequestMethod.GET)
+	public ModelAndView deleteAns(HttpServletRequest request) {
+		return new ModelAndView(adminService.delAnswer(request));
 	}
 
 }

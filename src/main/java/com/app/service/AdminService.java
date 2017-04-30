@@ -51,6 +51,7 @@ public class AdminService {
 		request.setAttribute("error", "There was a error in doing the post or the question already exists");
 		page="admin";
 	}
+	
 		return page;
 	}
 
@@ -127,20 +128,6 @@ public class AdminService {
 	 * @return
 	 */
 
-	public int updateValues(HttpServletRequest request) {
-		int id = Integer.parseInt(request.getParameter("id"));
-		String hardAns = (request.getParameter("hardAns"));
-		String softAns = (request.getParameter("softAns"));
-
-		int i = informationObtainer.updateValues(id, hardAns, softAns);
-		if (i == 1) {
-			request.setAttribute("success", "The question has been updated successfully");
-		} else {
-			request.setAttribute("failurs", "sorry there was a problem in updating the question");
-		}
-		return i;
-
-	}
 	
 
 	public  String submitAns(HttpServletRequest request) {
@@ -196,7 +183,7 @@ public class AdminService {
 		int i =informationObtainer.addAnswersAdmin(qa);
 		String page="";
 		if(i==1){
-			request.setAttribute("success", "The answwer has been successfully posted");
+			request.setAttribute("success", "The answer has been successfully posted");
 			page="admin";
 		}else{
 			request.setAttribute("error", "The answer already exists, please try again");
@@ -223,6 +210,54 @@ public class AdminService {
 			request.setAttribute("question", list);
 		}
 		return "getQuestion";
+	}
+
+	
+	public String updateValue(String wanted) {
+		
+		return "updateAns";
+	}
+
+	public String updateAnswers(HttpServletRequest request) {
+		int id= Integer.parseInt(request.getParameter("id"));
+		String answer = request.getParameter("answer");
+		QuestionsAnswer qa = new QuestionsAnswer();
+		qa.setId(id);
+		qa.setAnswer(answer);
+		int i= informationObtainer.updateAnswer(qa);
+		String page ="";
+		if(i==1){
+			request.setAttribute("success", "The answer has been updated successfully");
+			page="admin";
+		}else{
+			request.setAttribute("error", "The answer cannot be updated, please try again");
+			page="admin";
+			
+		}
+		return page;
+	}
+
+	public String delQuestion(HttpServletRequest request) {
+		
+		return null;
+	}
+
+	public String delAnswer(HttpServletRequest request) {
+		QuestionsAnswer qa = new QuestionsAnswer();
+		qa.setId(Integer.parseInt(request.getParameter("id")));
+		System.out.println(qa.getId());
+		qa.setAnswer(request.getParameter("wanted"));
+		int  i = informationObtainer.delAnswer(qa);
+		String page ="";
+		if(i==1){
+			request.setAttribute("success", "The answer has been successfully deleted");
+			page="admin";
+		}else{
+			request.setAttribute("error", "The answer cannot be deleted, please try again");
+			page="admin";
+			
+		}
+		return "admin";
 	}
 
 }

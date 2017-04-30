@@ -44,7 +44,6 @@
 	<bean id="questionsAnswer" class="com.app.model.QuestionsAnswer"/>
 	<bean id="userService" class="com.app.service.UserService"/>
 	<bean id="userServices" class="com.app.dao.UserServices"/>
-	<bean id="registerValidate" class="com.app.service.RegisterValidate"/>
 	
 	<bean id="register" class="com.app.model.Register"/>
 
